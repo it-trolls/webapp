@@ -1,0 +1,44 @@
+.menu {
+  &__container {
+    background-color: #fff;
+    height: 10vh;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__left {
+    margin-left: 1rem;
+  }
+
+  &__right {
+    margin-right: 1rem;
+    width: 20vw;
+
+    & nav {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    & ul {
+      display: flex;
+    }
+
+    & li {
+      list-style: none;
+      font-size: 1.4rem;
+
+      &:not(:last-child) {
+        margin-right: 2rem;
+      }
+    }
+
+    & a,
+    & a:visited {
+      color: black;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+  }
+}
