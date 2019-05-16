@@ -1,0 +1,11 @@
+@import './variables';
+
+.heading-secondary {
+  color: $color-secundary;
+  font-size: 3rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  display: inline-block;
+  letter-spacing: 0.3rem;
+  margin: 3rem 0 0 0;
+}
