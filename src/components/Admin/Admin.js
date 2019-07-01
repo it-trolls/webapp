@@ -1,5 +1,5 @@
 import React from 'react';
-import Sidebar from './Sidebar'
+import Users from './Users'
 import './admin.scss'
 import { Layout, Menu, Icon } from 'antd';
 
@@ -17,17 +17,27 @@ class Admin extends React.Component {
   };
 
   render() {
+    const logo = this.state.collapsed ? <Icon type="home" /> : 'InmobApp';
     return (
       <Layout className="admin">
-        <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
-          <div className="logo" />
+        <Sider trigger={null} collapsible collapsed={this.state.collapsed}
+        breakpoint="lg" 
+        collapsedWidth="0"
+        onBreakpoint={
+          broken => {
+            console.log(broken);
+          }}
+        onCollapse={(collapsed, type) => {
+          console.log(collapsed, type)
+        }}>
+          <div className="logo">{logo}</div> 
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1">
               <Icon type="user" />
               <span>Usuarios</span>
             </Menu.Item>
             <Menu.Item key="2">
-              <Icon type="video-camera" />
+              <Icon type="video-camera" />  
               <span>Dashboard</span>
             </Menu.Item>
             <Menu.Item key="3">
@@ -52,7 +62,9 @@ class Admin extends React.Component {
               minHeight: 280,
             }}
           >
-            Content
+            Usuarios
+            <Users></Users>
+
           </Content>
         </Layout>
       </Layout>
