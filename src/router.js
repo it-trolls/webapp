@@ -10,6 +10,7 @@ import Menu from './components/Menu';
 import Home from './components/hoc/layout';
 import Login from './components/RegisterLogin/Login';
 import Register from './components/RegisterLogin/Register';
+import Admin from './components/Admin/Admin';
 
 const Routes = () => {
   return (
@@ -20,6 +21,7 @@ const Routes = () => {
           <Switch>
             <Route path='/signIn' component={Login} />
             <Route path='/signUp' component={Register} />
+            <Route path='/admin' component={Admin} />
             <Route path='/' exact component={Home} />
           </Switch>
         </Fragment>

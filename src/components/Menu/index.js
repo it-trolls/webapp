@@ -12,6 +12,9 @@ const Menu = () => (
             <Link to='/'>Home</Link>
           </li>
           <li>
+            <Link to='/admin'>Admin</Link>
+          </li>
+          <li>
             <Link to='/signUp'>Registraté</Link>
           </li>
           <li>
