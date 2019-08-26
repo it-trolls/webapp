@@ -1,7 +1,7 @@
 import React from 'react';
 import Users from './Users'
 import './admin.scss'
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Button } from 'antd';
 
 const { Header, Sider, Content } = Layout;
 
@@ -17,7 +17,6 @@ class Admin extends React.Component {
   };
 
   render() {
-    const logo = this.state.collapsed ? <Icon type="home" /> : 'InmobApp';
     return (
       <Layout className="admin">
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}
@@ -28,9 +27,9 @@ class Admin extends React.Component {
             console.log(broken);
           }}
         onCollapse={(collapsed, type) => {
-          console.log(collapsed, type)
+          this.toggle();
         }}>
-          <div className="logo">{logo}</div> 
+          <div className="logo"><Icon type="home"/> InmobApp</div> 
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1">
               <Icon type="user" />
@@ -63,6 +62,7 @@ class Admin extends React.Component {
             }}
           >
             Usuarios
+            <Button className="addBtn">Nuevo</Button>
             <Users></Users>
 
           </Content>

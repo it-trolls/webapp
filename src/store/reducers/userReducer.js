@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_UP, GET_ERRORS, LOGOUT_USER } from '../Actions/type';
+import { SIGN_IN, SIGN_UP, GET_ERRORS, LOGOUT_USER } from '../actions/type';
 
 const initialState = {
   isAuthenticated: false,

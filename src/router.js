@@ -7,9 +7,9 @@ import store from './store';
 
 /** Components */
 import Menu from './components/Menu';
-import Home from './components/hoc/layout';
-import Login from './components/RegisterLogin/Login';
-import Register from './components/RegisterLogin/Register';
+import Home from './components/Home';
+import Login from './components/Login';
+import Register from './components/Register';
 import Admin from './components/Admin/Admin';
 
 const Routes = () => {
@@ -17,7 +17,6 @@ const Routes = () => {
     <Provider store={store}>
       <Router>
         <Fragment>
-          <Menu />
           <Switch>
             <Route path='/signIn' component={Login} />
             <Route path='/signUp' component={Register} />

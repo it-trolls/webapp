@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { SIGN_IN, SIGN_UP, GET_ERRORS, LOGOUT_USER } from './type';
-import { AUTH_SERVER } from '../components/utils/misc';
+import { AUTH_SERVER } from '../../components/utils/misc';
 
 export const signUp = data => {
   return async dispatch => {
