@@ -3,15 +3,11 @@ import styled from 'styled-components'
 
 const Form = styled.form`
 width: 300px;
-margin: auto 2rem;
 border-radius: 2px;
 display: flex;
 flex-direction: column;
 justify-content: center;
-position: relative;
-top: 30%;
-left: 25%;
-padding: 8px;
+padding: 20px;
 background-color: rgba(255,255,255,0.8);
 box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 `
@@ -19,20 +15,28 @@ box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 const Title = styled.h2`
 text-align: center;
 margin: 15px;
+margin-bottom: 2rem;
 `
 
 const Input = styled.input` 
-margin-bottom: 15px;
+margin-bottom: 2rem;
 background: rgba(255,255,255,0.1);
-border-radius: 2px;
-border: 1px solid lightblue;
+border-top: none;
+border-right: none;
+border-left: none;
+border-bottom: 1px solid lightblue;
+  :focus{
+    ::-webkit-input-placeholder {
+      opacity: 0;    
+    
+  }
+  }
 `
 
 const Button = styled.button`
-width: 100px;
-margin: 15px auto;
-line-height: 1.5rem;
-border-radius: 15px;
+width: 100%;
+margin: 5px auto;
+line-height: 2rem;
 color: white;
 outline: none;
 border: none;
@@ -59,21 +63,21 @@ const Login = (props) => {
     <Form onSubmit={handleSubmit}>
       <Title>
         Bienvenido a Inmobapp!
-          </Title>
-      <label>Nombre de Usuario</label>
+      </Title>
       <Input
         type="text"
         value={user}
         onChange={e => setUser(e.target.value)}
+        placeholder="Correo Electronico"
       />
-      <label>Contraseña</label>
       <Input
         type="password"
         value={password}
         onChange={e => setPassword(e.target.value)}
+        placeholder="Contraseña"
       />
-      <a onClick={props.onToggle}>¿No tienes cuenta? Registrate!</a>
       <Button type="submit" value="Submit">Ingresar</Button>
+      <Button onClick={props.onToggle}>Registrarse</Button>
     </Form>
   )
 }
