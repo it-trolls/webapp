@@ -6,6 +6,7 @@ import Register from './Register'
 import bg from '../assets/loginbg.jpg'
 
 const Container = styled.div`
+font-family: 'Roboto', sans-serif;
 display: flex;
 justify-content:flex-end;
 height: 100%;
