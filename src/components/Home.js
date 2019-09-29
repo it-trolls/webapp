@@ -74,7 +74,7 @@ const Searchbar = styled.div`
 
 const Home = () => {
   return (
-    <>
+    <div style={{ backgroundColor: "#eee" }}>
       <Hero>
         <Navbar>
           <Logo>
@@ -113,7 +113,7 @@ const Home = () => {
         </Searchbar>
       </Hero>
       <Dashboard />
-    </>
+    </div>
   );
 };
 

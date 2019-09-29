@@ -4,15 +4,14 @@ import styled from "styled-components";
 
 const Layout = styled.main`
   margin-top: 2rem;
-  margin-bottom: 2rem;
+  padding-bottom: 1rem;
   width: 100%;
-  height: 100vh;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
-  @media min-width(500px) {
-    background: green;
+  background-color: #eee;
+  @media (max-width: 768px) {
+    flex-direction: column;
   }
 `;
 
@@ -23,6 +22,16 @@ const SideMenu = styled.div`
   display: flex;
   flex-direction: column;
   height: 400px;
+  ul {
+    list-style: none;
+    margin-top: 5px;
+    padding: 5px;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    margin-left: 0px;
+  }
 `;
 
 const Content = styled.div`
