@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Dashboard from "./Dashboard";
 import background from "../assets/citybg.jpg";
-
+import { NavLink } from "react-router-dom";
 const Hero = styled.header`
   min-height: 600px;
   width: 100%;
@@ -55,21 +55,38 @@ const MenuLink = styled.li`
 const Searchbar = styled.div`
   margin-top: 15%;
   margin: auto;
-  width: 550px;
+  width: 650px;
   height: 50px;
-  input {
-    padding: 15px;
-    width: 40%;
-    height: 100%;
-  }
-  select {
-    width: 20%;
-    height: 100%;
+  display: flex;
+  div {
+    flex: 30%;
+    input {
+      width: 100%;
+      padding: 15px;
+      height: 100%;
+      border: none;
+    }
   }
   button {
-    width: 20%;
-    height: 100%;
+    border: none;
+    .material-icons {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
   }
+`;
+
+const SelectType = styled.select`
+  height: 100%;
+  width: 25%;
+  border: none;
+`;
+
+const SelectCity = styled.select`
+  height: 100%;
+  width: 15%;
+  border: none;
 `;
 
 const Home = () => {
@@ -85,31 +102,35 @@ const Home = () => {
           </Logo>
           <Menu>
             <MenuLink>
-              <a>Ingresar</a>
+              <NavLink to="/auth">Ingresar</NavLink>
             </MenuLink>
             <MenuLink>
-              <a>FAQ</a>
+              <NavLink to="/faq">FAQ</NavLink>
             </MenuLink>
-            <MenuLink>
-              <a>Otro</a>
+            <MenuLink to="/otro">
+              <NavLink>Otro</NavLink>
             </MenuLink>
           </Menu>
         </Navbar>
         <Searchbar>
-          <input placeholder="Search..." />
-          <select>
+          <div>
+            <input placeholder="Busca tu nuevo inmueble..." />
+          </div>
+          <SelectType>
             <option>Tipo de inmueble</option>
             <option>Casa</option>
             <option>Departamento</option>
             <option>Local comercial</option>
-          </select>
-          <select>
+          </SelectType>
+          <SelectCity>
             <option>Ubicacion</option>
             <option>Rio Cuarto</option>
             <option>Cordoba</option>
             <option>San Luis</option>
-          </select>
-          <button>Search</button>
+          </SelectCity>
+          <button>
+            <i class="material-icons">search</i>
+          </button>
         </Searchbar>
       </Hero>
       <Dashboard />
