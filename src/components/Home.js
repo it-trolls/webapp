@@ -2,22 +2,25 @@ import React from "react";
 import styled from "styled-components";
 import Dashboard from "./Dashboard";
 import background from "../assets/citybg.jpg";
+import logo from "../assets/logo.png";
 import { NavLink } from "react-router-dom";
+
 const Hero = styled.header`
   min-height: 600px;
   width: 100%;
   overflow-x: hidden;
-  background-image: url(${background});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  // background-image: url(${background});
+  // background-position: center;
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  background-color: rgba(0,0,0,0.9);
   display: flex;
   flex-direction: column;
 `;
 
 const Navbar = styled.nav`
-  margin-top: 15px;
-  padding-left: 15px;
+  margin-top: 25px;
+  padding-left: 25px;
   padding-right: 15px;
   display: flex;
   justify-content: space-between;
@@ -37,9 +40,13 @@ const Menu = styled.ul`
 `;
 
 const MenuLink = styled.li`
-  background: #333;
+  background: none;
+  font-size: 1.1rem;
+  letter-spacing: 1.5px;
+  font-weight: 500;
+  color: whitesmoke;
   :hover {
-    background: whitesmoke;
+    background: #ccc;
   }
   a {
     display: inline-block;
@@ -95,10 +102,7 @@ const Home = () => {
       <Hero>
         <Navbar>
           <Logo>
-            <img
-              src="https://s3.amazonaws.com/freecodecamp/freecodecamp_logo.svg"
-              alt="freeCodeCamp logo"
-            />
+            <img src={logo} alt="Inmobapp logo" />
           </Logo>
           <Menu>
             <MenuLink>
@@ -128,9 +132,6 @@ const Home = () => {
             <option>Cordoba</option>
             <option>San Luis</option>
           </SelectCity>
-          <button>
-            <i class="material-icons">search</i>
-          </button>
         </Searchbar>
       </Hero>
       <Dashboard />
