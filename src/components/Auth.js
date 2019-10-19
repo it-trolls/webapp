@@ -3,19 +3,27 @@ import styled from "styled-components";
 import axios from "axios";
 import Login from "./Login";
 import Register from "./Register";
-import bg from "../assets/loginbg.jpg";
+import bg from "../assets/houseinside.jpg";
 
 const Container = styled.div`
   font-family: "Roboto", sans-serif;
-  display: flex;
-  justify-content: flex-end;
-  height: 100%;
+  height: 100vh;
   background-image: url(${bg});
   background-size: cover;
-  height: 100vh;
 `;
+
+const Panel = styled.div`
+  height: 100%;
+  background-color: rgba(1, 1, 1, 0.15);
+`;
+
 const Card = styled.div`
-  margin: auto;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 `;
 
 class Auth extends React.Component {
@@ -54,7 +62,9 @@ class Auth extends React.Component {
     );
     return (
       <Container>
-        <Card>{display}</Card>
+        <Panel>
+          <Card>{display}</Card>
+        </Panel>
       </Container>
     );
   }

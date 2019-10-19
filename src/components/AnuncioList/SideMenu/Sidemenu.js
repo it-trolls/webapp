@@ -22,8 +22,6 @@ const SideMenu = styled.div`
 
 const Sidemenu = props => (
   <SideMenu>
-    <h5>bread/crumbs</h5>
-    <h3>Front Page</h3>
     <h4>Ordenar publicaciones</h4>
 
     <h4>Tipo de inmueble</h4>

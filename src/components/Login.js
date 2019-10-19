@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Redirect } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import Lock from "@material-ui/icons/Lock";
+import logo from "../assets/logoblue.jpeg";
 
 const Form = styled.form`
-  width: 300px;
+  width: 450px;
   border-radius: 2px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: whitesmoke;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 `;
 
@@ -19,33 +25,20 @@ const Title = styled.h2`
   margin-bottom: 2rem;
 `;
 
-const Input = styled.input`
-  margin-bottom: 2rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-top: none;
-  border-right: none;
-  border-left: none;
-  border-bottom: 1px solid lightblue;
-  :focus {
-    ::-webkit-input-placeholder {
-      opacity: 0;
-    }
-  }
+const Logo = styled.img`
+  height: 110px;
 `;
 
-const Button = styled.button`
-  width: 100%;
-  margin: 5px auto;
-  line-height: 2rem;
-  color: white;
-  outline: none;
-  border: none;
-  background: rgb(0, 128, 128);
-`;
+const useStyles = makeStyles(theme => ({
+  margin: {
+    margin: theme.spacing(1)
+  }
+}));
 
 const Login = props => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
+  const classes = useStyles();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -58,23 +51,57 @@ const Login = props => {
   };
   return (
     <Form onSubmit={handleSubmit}>
+      <div style={{ textAlign: "center" }}>
+        <Logo src={logo} alt="Inmobapp logo" />
+      </div>
       <Title>Bienvenido a Inmobapp!</Title>
-      <Input
-        type="text"
+      <TextField
+        className={classes.margin}
+        id="input-with-icon-textfield"
+        label="Usuario"
         value={user}
         onChange={e => setUser(e.target.value)}
-        placeholder="Correo Electronico"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <AccountCircle />
+            </InputAdornment>
+          )
+        }}
       />
-      <Input
+      <TextField
+        className={classes.margin}
+        id="input-with-icon-textfield"
+        label="Contraseña"
         type="password"
         value={password}
         onChange={e => setPassword(e.target.value)}
-        placeholder="Contraseña"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <Lock />
+            </InputAdornment>
+          )
+        }}
       />
-      <Button type="submit" value="Submit">
+      <Button
+        variant="contained"
+        size="medium"
+        color="primary"
+        type="submit"
+        value="Submit"
+        className={classes.margin}
+      >
         Ingresar
       </Button>
-      <Button onClick={props.onToggle}>Registrarse</Button>
+      <Button
+        variant="contained"
+        size="medium"
+        className={classes.margin}
+        onClick={props.onToggle}
+      >
+        Registrarse
+      </Button>
     </Form>
   );
 };
