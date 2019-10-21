@@ -1,5 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
+import Hidden from "@material-ui/core/Hidden";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import Typography from "@material-ui/core/Typography";
+import logo from "../../../assets/logoblue.jpeg";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { ListSubheader } from "@material-ui/core";
 
 const SideMenu = styled.div`
   margin-top: 2.5rem;
@@ -19,37 +29,189 @@ const SideMenu = styled.div`
     margin-left: 0px;
   }
 `;
+const Category = styled.h4`
+  font-weight: bold;
+`;
 
-const Sidemenu = props => (
-  <SideMenu>
-    <h4>Ordenar publicaciones</h4>
+const Listrrr = styled.div`
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+`;
 
-    <h4>Tipo de inmueble</h4>
-    <ul>
-      <li>Casa</li>
-      <li>Departamento</li>
-      <li>Oficina</li>
-    </ul>
-    <h4>Cantidad de habitaciones</h4>
-    <ul>
-      <li>Monoambiente</li>
-      <li>1 habitacion</li>
-      <li>2 habitaciones</li>
-      <li>Mas de 2 habitaciones</li>
-    </ul>
-    <h4>Ubicación</h4>
-    <ul>
-      <li>Centro</li>
-      <li>Microcentro</li>
-      <li>Macrocentro</li>
-    </ul>
-    <h4>Precio</h4>
-    <ul>
-      <li>Caro</li>
-      <li>Muy Caro</li>
-      <li>Carisimo</li>
-    </ul>
-  </SideMenu>
-);
+const Filter = styled.div`
+  cursor: pointer;
+`;
+
+const drawerWidth = 240;
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex"
+  },
+  drawer: {
+    [theme.breakpoints.up("sm")]: {
+      width: drawerWidth,
+      flexShrink: 0
+    }
+  },
+  appBar: {
+    marginLeft: drawerWidth,
+    [theme.breakpoints.up("sm")]: {
+      width: `calc(100% - ${drawerWidth}px)`
+    }
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up("sm")]: {
+      display: "none"
+    }
+  },
+  toolbar: theme.mixins.toolbar,
+  drawerPaper: {
+    width: drawerWidth
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3)
+  },
+  nested: {
+    paddingLeft: theme.spacing(4)
+  }
+}));
+
+const Sidemenu = props => {
+  const classes = useStyles();
+  const { container } = props;
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(true);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
+
+  const drawer = (
+    <div>
+      <Typography align="center">
+        <img src={logo} alt="Inmobapp logo" height="64px" />
+      </Typography>
+      <Divider />
+      <List
+        aria-labellebby="ordenar-anuncios"
+        subheader={
+          <ListSubheader component="div" id="ordenar-anuncios">
+            Ordenar anuncios
+          </ListSubheader>
+        }
+      >
+        <ListItem>
+          <ListItemText primary="Tipo de inmueble" />
+        </ListItem>
+        <List dense component="div" disablePadding>
+          <ListItem button className={classes.nested}>
+            <ListItemText primary="Casa" />
+          </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemText primary="Departamento" />
+          </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemText primary="Oficina" />
+          </ListItem>
+        </List>
+        <ListItem>
+          <ListItemText primary="Cantidad de habitaciones" />
+        </ListItem>
+        <List dense component="div" disablePadding>
+          <ListItem button className={classes.nested}>
+            <ListItemText primary="Monoambiente" />
+          </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemText primary="Dos habitaciones" />
+          </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemText primary="Más de dos" />
+          </ListItem>
+        </List>
+        <ListItem>
+          <ListItemText primary="Ubicación" />
+        </ListItem>
+        <List dense component="div">
+          <ListItem button className={classes.nested}>
+            <ListItemText primary="Centro" />
+          </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemText primary="Microcentro" />
+          </ListItem>
+          <ListItem button className={classes.nested}>
+            <ListItemText primary="Macrocentro" />
+          </ListItem>
+        </List>
+      </List>
+    </div>
+  );
+  // <SideMenu>
+  //   <Category>Ordenar publicaciones</Category>
+
+  //   <Category>Tipo de inmueble</Category>
+  //   <List>
+  //     <Filter>Casa</Filter>
+  //     <Filter>Departamento</Filter>
+  //     <Filter>Oficina</Filter>
+  //   </List>
+  //   <Category>Cantidad de habitaciones</Category>
+  //   <List>
+  //     <Filter>Monoambiente</Filter>
+  //     <Filter>1 habitacion</Filter>
+  //     <Filter>2 habitaciones</Filter>
+  //     <Filter>Mas de 2 habitaciones</Filter>
+  //   </List>
+  //   <Category>Ubicación</Category>
+  //   <List>
+  //     <Filter>Centro</Filter>
+  //     <Filter>Microcentro</Filter>
+  //     <Filter>Macrocentro</Filter>
+  //   </List>
+  //   <Category>Precio</Category>
+  //   <List>
+  //     <Filter>Caro</Filter>
+  //     <Filter>Muy Caro</Filter>
+  //     <Filter>Carisimo</Filter>
+  //   </List>
+  // </SideMenu>
+  return (
+    <nav className={classes.drawer} aria-label="mailbox folders">
+      {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+      <Hidden smUp implementation="css">
+        <Drawer
+          container={container}
+          variant="temporary"
+          anchor={theme.direction === "rtl" ? "right" : "left"}
+          open={props.mobileOpen}
+          onClose={props.handleDrawerToggle}
+          classes={{
+            paper: classes.drawerPaper
+          }}
+          ModalProps={{
+            keepMounted: true // Better open performance on mobile.
+          }}
+        >
+          {drawer}
+        </Drawer>
+      </Hidden>
+      <Hidden xsDown implementation="css">
+        <Drawer
+          classes={{
+            paper: classes.drawerPaper
+          }}
+          variant="permanent"
+          open
+        >
+          {drawer}
+        </Drawer>
+      </Hidden>
+    </nav>
+  );
+};
 
 export default Sidemenu;
