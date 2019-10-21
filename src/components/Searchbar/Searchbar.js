@@ -16,7 +16,8 @@ const useStyles = makeStyles(theme => ({
   },
   cssOutlinedInput: {
     "&$cssFocused $notchedOutline": {
-      borderColor: `${theme.palette.primary.main} !important`
+      borderColor: `white !important`,
+      color: "white"
     }
   },
   notchedOutline: {
@@ -42,11 +43,12 @@ const SearchBar = props => {
       InputProps={{
         classes: {
           root: classes.cssOutlinedInput,
-          notchedOutline: classes.notchedOutline
+          notchedOutline: classes.notchedOutline,
+          input: classes.cssLabel
         },
         startAdornment: (
           <InputAdornment position="start" color="inherit">
-            <Search />
+            <Search color="primary" />
           </InputAdornment>
         )
       }}

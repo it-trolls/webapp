@@ -1,0 +1,32 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M9 28.0276V181H43V1.18427L9 28.0276Z" fill="#313131"/>
+<rect x="50" y="1" width="28" height="180" fill="#313131"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M78 1H50L151 181H180L125 83.9412V34H104V46.8824L78 1Z" fill="#2F80ED"/>
+<rect x="87" y="129" width="10.4167" height="10.4167" fill="#8FBAF3"/>
+<rect x="101.583" y="143.583" width="10.4167" height="10.4167" fill="#8FBAF3"/>
+<rect x="87" y="143.583" width="10.4167" height="10.4167" fill="#8FBAF3"/>
+<rect x="101.583" y="129" width="10.4167" height="10.4167" fill="#8FBAF3"/>
+<rect x="11" y="40" width="10" height="10" fill="#8FBAF3"/>
+<rect x="25" y="54" width="10" height="10" fill="#8FBAF3"/>
+<rect x="11" y="54" width="10" height="10" fill="#8FBAF3"/>
+<rect x="25" y="40" width="10" height="10" fill="#8FBAF3"/>
+<rect x="11" y="68" width="10" height="10" fill="#8FBAF3"/>
+<rect x="25" y="82" width="10" height="10" fill="#8FBAF3"/>
+<rect x="11" y="82" width="10" height="10" fill="#8FBAF3"/>
+<rect x="25" y="68" width="10" height="10" fill="#8FBAF3"/>
+<rect x="11" y="96" width="10" height="10" fill="#8FBAF3"/>
+<rect x="25" y="110" width="10" height="10" fill="#8FBAF3"/>
+<rect x="11" y="110" width="10" height="10" fill="#8FBAF3"/>
+<rect x="25" y="96" width="10" height="10" fill="#8FBAF3"/>
+<rect x="11" y="124" width="10" height="10" fill="#8FBAF3"/>
+<rect x="25" y="138" width="10" height="10" fill="#8FBAF3"/>
+<rect x="11" y="138" width="10" height="10" fill="#8FBAF3"/>
+<rect x="25" y="124" width="10" height="10" fill="#8FBAF3"/>
+</g>
+<defs>
+<clipPath id="clip0">
+<rect width="180" height="180" fill="white"/>
+</clipPath>
+</defs>
+</svg>

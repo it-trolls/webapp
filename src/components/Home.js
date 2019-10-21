@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <div style={{ backgroundColor: "#eee" }}>
       <CssBaseline />
-      <Dashboard />
+      <Hero />
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React from "react";
 import Anuncio from "./Anuncio/Anuncio";
 import styled from "styled-components";
 import Side from "./SideMenu/Sidemenu";
+import Paper from "@material-ui/core/Paper";
 
 const Layout = styled.main`
   margin-top: 2rem;
@@ -42,7 +43,6 @@ const Dashboard = props => {
     <Layout>
       <Side mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} />
       <Content>
-        <h2 style={{ textAlign: "center" }}>Anuncios destacados</h2>
         <Grid>
           <Anuncio></Anuncio>
           <Anuncio></Anuncio>

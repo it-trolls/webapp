@@ -1,15 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import background from "../../assets/citybg3.jpg";
+import logo from "../../assets/logoblue.jpeg";
 import Searchbar from "../Searchbar/Searchbar";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 import { NavLink } from "react-router-dom";
 
 const Hero = styled.header`
-  min-height: 600px;
+  min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(${background});
   background-position: center;
   background-repeat: no-repeat;
@@ -33,16 +35,18 @@ const Navbar = styled.nav`
 
 const Logo = styled.a`
   grid-area: Logo;
-  display: inline;
-  img {
-    vertical-align: middle;
-  }
+  margin-top: 2rem;
+  padding-left: 25px;
 `;
 
 const Menu = styled.ul`
   list-style: none;
   display: flex;
   color: white;
+  a {
+    text-decoration: none;
+    color: white;
+  }
 `;
 
 const MenuLink = styled.li`
@@ -78,13 +82,22 @@ const Search = styled.div`
 
 const hero = pros => {
   return (
-    <>
-      <Logo>Inmob</Logo>
+    <Hero>
+      <Logo>
+        <NavLink to="/">
+          <img src={logo} alt="Inmob logo" height="64px" />
+        </NavLink>
+      </Logo>
       <Navbar>
         <Menu>
-          <MenuLink>
+          <Button color="inherit">
+            <NavLink to="/auth">Crear anuncio</NavLink>
+          </Button>
+        </Menu>
+        <Menu>
+          <Button variant="outlined" color="inherit">
             <NavLink to="/auth">Ingresar</NavLink>
-          </MenuLink>
+          </Button>
         </Menu>
       </Navbar>
       <Title>
@@ -97,8 +110,13 @@ const hero = pros => {
       </Title>
       <Search>
         <Searchbar></Searchbar>
+        <Button variant="outlined" color="inherit">
+          <NavLink to="/dashboard" style={{ color: "white" }}>
+            Ver todos los anuncios
+          </NavLink>
+        </Button>
       </Search>
-    </>
+    </Hero>
   );
 };
 
