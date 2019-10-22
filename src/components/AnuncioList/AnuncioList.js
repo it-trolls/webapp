@@ -3,9 +3,10 @@ import Anuncio from "./Anuncio/Anuncio";
 import styled from "styled-components";
 import Side from "./SideMenu/Sidemenu";
 import Paper from "@material-ui/core/Paper";
+import Nav from "../Nav/Nav";
 
 const Layout = styled.main`
-  margin-top: 2rem;
+  margin-top: 4rem;
   padding-bottom: 1rem;
   width: 100%;
   display: flex;
@@ -30,6 +31,7 @@ const Grid = styled.div`
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
 `;
 
@@ -40,18 +42,21 @@ const Dashboard = props => {
     setMobileOpen(!mobileOpen);
   };
   return (
-    <Layout>
-      <Side mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} />
-      <Content>
-        <Grid>
-          <Anuncio></Anuncio>
-          <Anuncio></Anuncio>
-          <Anuncio></Anuncio>
-          <Anuncio></Anuncio>
-          <Anuncio></Anuncio>
-        </Grid>
-      </Content>
-    </Layout>
+    <>
+      <Nav></Nav>
+      <Layout>
+        <Side mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} />
+        <Content>
+          <Grid>
+            <Anuncio></Anuncio>
+            <Anuncio></Anuncio>
+            <Anuncio></Anuncio>
+            <Anuncio></Anuncio>
+            <Anuncio></Anuncio>
+          </Grid>
+        </Content>
+      </Layout>
+    </>
   );
 };
 

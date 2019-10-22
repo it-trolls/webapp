@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import background from "../../assets/citybg3.jpg";
-import logo from "../../assets/logoblue.jpeg";
+import logo from "../../assets/logo.png";
 import Searchbar from "../Searchbar/Searchbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -83,11 +83,6 @@ const Search = styled.div`
 const hero = pros => {
   return (
     <Hero>
-      <Logo>
-        <NavLink to="/">
-          <img src={logo} alt="Inmob logo" height="64px" />
-        </NavLink>
-      </Logo>
       <Navbar>
         <Menu>
           <Button color="inherit">
@@ -102,10 +97,10 @@ const hero = pros => {
       </Navbar>
       <Title>
         <Typography variant="h2" color="inherit" gutterBottom>
-          Bienvenido a Inmobapp!
+          <img src={logo} alt="Inmob logo" height="100px" />
         </Typography>
         <Typography variant="h4" color="inherit">
-          Encontra tu nuevo Hogar!
+          Inmobapp, encontra tu nuevo Hogar!
         </Typography>
       </Title>
       <Search>
