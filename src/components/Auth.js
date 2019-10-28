@@ -39,7 +39,7 @@ class Auth extends React.Component {
           console.log("Authenticato");
         })
         .catch(err => console.log(err));
-      this.props.history.push("/");
+      this.props.history.push("/dashboard");
     } else {
       axios
         .post("localhost:3010/auth/register", payload)

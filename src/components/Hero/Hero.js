@@ -85,11 +85,6 @@ const hero = pros => {
     <Hero>
       <Navbar>
         <Menu>
-          <Button color="inherit">
-            <NavLink to="/auth">Crear anuncio</NavLink>
-          </Button>
-        </Menu>
-        <Menu>
           <Button variant="outlined" color="inherit">
             <NavLink to="/auth">Ingresar</NavLink>
           </Button>

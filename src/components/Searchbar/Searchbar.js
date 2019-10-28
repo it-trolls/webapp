@@ -34,21 +34,19 @@ const SearchBar = props => {
   return (
     <TextField
       id="outlined-search"
-      label="Buscar propiedad..."
       type="search"
+      placeholder="¿Qué estas buscando?"
       className={classes.textField}
-      InputLabelProps={{
-        classes: { root: classes.cssLabel }
-      }}
       InputProps={{
         classes: {
           root: classes.cssOutlinedInput,
           notchedOutline: classes.notchedOutline,
-          input: classes.cssLabel
+          input: classes.cssLabel,
+          focused: classes.cssLabel
         },
         startAdornment: (
           <InputAdornment position="start" color="inherit">
-            <Search color="primary" />
+            <Search color="secondary" />
           </InputAdornment>
         )
       }}
