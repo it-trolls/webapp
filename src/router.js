@@ -2,8 +2,8 @@ import React, { Fragment } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 /** Redux */
-import { Provider, Connect } from "react-redux";
-import store from "./store";
+import { connect } from "react-redux";
+import * as actions from "./store/actions/userActions";
 
 /** Components */
 import Dashboard from "./components/AnuncioList/AnuncioList";
@@ -17,29 +17,40 @@ import Nav from "./components/Nav/Nav";
 class Routes extends React.Component {
   render() {
     return (
-      <Provider store={store}>
-        <Router>
-          <Fragment>
-            <Nav />
-            <Switch>
-              <Route path="/auth" component={Auth} />
-              <Route path="/admin" component={Admin} />
-              <Route path="/detalle" component={AnuncioDetalle} />
-              <Route path="/dashboard" component={Dashboard} />
-              <Route path="/nuevo" component={CrearAnuncio} />
-              <Route path="/" exact component={Home} />
-            </Switch>
-          </Fragment>
-        </Router>
-      </Provider>
+      <Router>
+        <Switch>
+          <Route path="/auth" component={Auth} />
+          <Route path="/admin" component={Admin} />
+          <Route path="/detalle" component={AnuncioDetalle} />
+          <Route
+            path="/dashboard"
+            component={() => (
+              <Dashboard
+                sideBar={this.props.sideBar}
+                openSideBar={this.props.sideBarOpen}
+              />
+            )}
+          />
+          <Route path="/nuevo" component={CrearAnuncio} />
+          <Route path="/" exact component={Home} />
+        </Switch>
+      </Router>
     );
   }
 }
 const mapStateToProps = state => {
-  return {};
+  return {
+    isAuthenticated: state.user.isAuthenticated,
+    sideBar: state.user.sideBar
+  };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    sideBarOpen: () => dispatch(actions.openSideBar())
+  };
 };
-export default Routes;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Routes);

@@ -10,10 +10,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+import NoteAddIcon from "@material-ui/icons/NoteAdd";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { NavLink } from "react-router-dom";
-import BotonCrear from "../../BotonCrear/BotonCrear";
 import logo from "../../../assets/logo.png";
 
 const useStyles = makeStyles(theme => ({
@@ -27,7 +26,8 @@ const useStyles = makeStyles(theme => ({
   title: {
     display: "none",
     [theme.breakpoints.up("sm")]: {
-      display: "block"
+      display: "block",
+      color: "white"
     }
   },
   search: {
@@ -68,7 +68,8 @@ const useStyles = makeStyles(theme => ({
   sectionDesktop: {
     display: "none",
     [theme.breakpoints.up("md")]: {
-      display: "flex"
+      display: "flex",
+      flexDirection: "row"
     }
   },
   sectionMobile: {
@@ -79,24 +80,32 @@ const useStyles = makeStyles(theme => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1
+  },
+  toolbar: {
+    display: "flex",
+    justifyContent: "space-between"
   }
 }));
 
 const ApplicationBar = props => {
   const classes = useStyles();
+  const hamb = props.side ? (
+    <IconButton
+      edge="start"
+      className={classes.menuButton}
+      color="inherit"
+      aria-label="open drawer"
+      onClick={props.openSideBar}
+    >
+      <MenuIcon />
+    </IconButton>
+  ) : null;
   return (
     <AppBar className={classes.appBar}>
-      <Toolbar>
-        <IconButton
-          edge="start"
-          className={classes.menuButton}
-          color="inherit"
-          aria-label="open drawer"
-        >
-          <MenuIcon />
-        </IconButton>
+      <Toolbar className={classes.toolbar}>
+        {hamb}
         <Typography className={classes.title} variant="h6" noWrap>
-          <NavLink to="/">
+          <NavLink to="/dashboard">
             <img src={logo} alt="Inmobapp logo" height="64px" />
           </NavLink>
         </Typography>
@@ -113,12 +122,17 @@ const ApplicationBar = props => {
             inputProps={{ "aria-label": "search" }}
           />
         </div>
-        <NavLink to="/nuevo" className={classes.title}>
-          <BotonCrear />
-        </NavLink>
         <div className={classes.sectionDesktop}>
-          <NavLink to="/mensajes">
+          <NavLink to="/nuevo" className={classes.title}>
             <IconButton aria-label="show 4 new mails" color="inherit">
+              <NoteAddIcon />
+            </IconButton>
+          </NavLink>
+          <NavLink to="/mensajes">
+            <IconButton
+              aria-label="show 4 new mails"
+              style={{ color: "white" }}
+            >
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>

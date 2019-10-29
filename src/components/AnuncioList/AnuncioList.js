@@ -36,17 +36,23 @@ const Grid = styled.div`
 `;
 
 const Dashboard = props => {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+    props.openSideBar();
   };
+
   return (
     <>
-      <Nav></Nav>
       <Layout>
-        <Side mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} />
+        <Side
+          mobileOpen={props.sideBar}
+          handleDrawerToggle={handleDrawerToggle}
+        />
         <Content>
+          <Nav
+            side={true}
+            sideBar={props.sideBar}
+            openSideBar={props.openSideBar}
+          />
           <Grid>
             <Anuncio></Anuncio>
             <Anuncio></Anuncio>

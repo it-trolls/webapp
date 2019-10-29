@@ -5,6 +5,7 @@ import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import logo from "../../assets/logo.png";
+import Nav from "../Nav/Nav";
 import { makeStyles } from "@material-ui/core/styles";
 import { DropzoneArea } from "material-ui-dropzone";
 
@@ -55,6 +56,8 @@ const CrearAnuncio = () => {
     <div>
       <React.Fragment>
         <Container maxWidth="md">
+          <Nav side={false} />
+
           <Paper className={classes.root}>
             <Typography variant="h5" component="h3" align="center">
               <img src={logo} alt="inmob app logo" height="64px" />

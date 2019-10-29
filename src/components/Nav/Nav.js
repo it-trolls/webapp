@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import ProfileMenu from "./ProfileMenu/ProfileMenu";
 import MobileMenu from "./MobileMenu/MobileMenu";
 import AppBar from "./AppBar/AppBar";
-import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -13,7 +12,6 @@ const useStyles = makeStyles(theme => ({
 
 const Nav = props => {
   const classes = useStyles();
-  const { location } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -37,14 +35,13 @@ const Nav = props => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const openSideBar = () => {
+    props.openSideBar();
+  };
+
   const menuId = "primary-search-account-menu";
   const mobileMenuId = "primary-search-account-menu-mobile";
-  if (
-    (location.pathname.match("/") && location.pathname.length == 1) ||
-    location.pathname.match("/auth")
-  ) {
-    return null;
-  }
+
   return (
     <div className={classes.grow}>
       <AppBar
@@ -52,6 +49,8 @@ const Nav = props => {
         handleProfileMenuOpen={handleProfileMenuOpen}
         mobileMenuId={mobileMenuId}
         handleMobileMenuOpen={handleMobileMenuOpen}
+        openSideBar={openSideBar}
+        side={props.side}
       />
       <MobileMenu
         mobileMoreAnchorEl={mobileMoreAnchorEl}
@@ -71,6 +70,4 @@ const Nav = props => {
     </div>
   );
 };
-
-const HideableNav = withRouter(Nav);
-export default HideableNav;
+export default Nav;
