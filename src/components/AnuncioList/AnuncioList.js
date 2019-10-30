@@ -40,6 +40,45 @@ const Dashboard = props => {
     props.openSideBar();
   };
 
+  const list = [
+    {
+      title: "Departamento 1",
+      status: "En Alquiler",
+      price: 3000,
+      rooms: 2,
+      bathrooms: 2,
+      kitchen: 1,
+      backyard: 0
+    },
+    {
+      title: "Casa 1",
+      status: "En Alquiler",
+      price: 7500,
+      rooms: 2,
+      bathrooms: 2,
+      kitchen: 1,
+      backyard: 0
+    },
+    {
+      title: "Casa 1",
+      status: "En venta",
+      price: 1000000,
+      rooms: 2,
+      bathrooms: 2,
+      kitchen: 1,
+      backyard: 0
+    },
+    {
+      title: "Oficina muy bonita",
+      status: "En Alquiler",
+      price: 5000,
+      rooms: 2,
+      bathrooms: 2,
+      kitchen: 1,
+      backyard: 0
+    }
+  ];
+
   return (
     <>
       <Layout>
@@ -54,11 +93,17 @@ const Dashboard = props => {
             openSideBar={props.openSideBar}
           />
           <Grid>
-            <Anuncio></Anuncio>
-            <Anuncio></Anuncio>
-            <Anuncio></Anuncio>
-            <Anuncio></Anuncio>
-            <Anuncio></Anuncio>
+            {list.map(item => (
+              <Anuncio
+                title={item.title}
+                status={item.status}
+                price={item.price}
+                rooms={item.rooms}
+                bathrooms={item.bathrooms}
+                kitchen={item.kitchen}
+                backyard={item.backyard}
+              />
+            ))}
           </Grid>
         </Content>
       </Layout>

@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
-import Fab from "@material-ui/core/Fab";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import HotelIcon from "@material-ui/icons/Hotel";
+import LocalFloristIcon from "@material-ui/icons/LocalFlorist";
 import Eye from "@material-ui/icons/Visibility";
 import Chip from "@material-ui/core/Chip";
 import Kitchen from "@material-ui/icons/Kitchen";
@@ -55,12 +58,6 @@ const Card = styled.div`
   }
 `;
 
-const Image = styled.div`
-  height: 60%;
-  background-image: url(${imagen});
-  background-size: cover;
-`;
-
 const Content = styled.div`
   padding: 1rem;
   height: 40%;
@@ -95,21 +92,23 @@ const Anuncio = props => {
   const classes = useStyles();
   return (
     <Card>
-      <Image />
+      <img
+        src={imagen}
+        alt={props.title + " image"}
+        style={{ height: "60%", width: "332px", backgroundSize: "cover" }}
+      />
       <Content>
         <div className={classes.propertyState}>
-          <Chip label="En Alquiler" color="primary" />
+          <Chip label={props.status} color="primary" />
         </div>
         <div className="title">
-          <h2>Casa barrio centro</h2>
+          <h2>{props.title}</h2>
         </div>
         <div className={classes.propertyTags}>
-          <Chip label="2 cocinas" icon={<Kitchen />} />
-          <Chip label="3 baños" icon={<Bathtub />} />
-          <Chip label="3 baños" icon={<Bathtub />} />
-          <Chip label="3 baños" icon={<Bathtub />} />
-          <Chip label="3 baños" icon={<Bathtub />} />
-          <Chip label="3 baños" icon={<Bathtub />} />
+          <Chip label={props.rooms} icon={<HotelIcon />} />
+          <Chip label={props.kitchen} icon={<Kitchen />} />
+          <Chip label={props.bathrooms} icon={<Bathtub />} />
+          <Chip label={props.backyard} icon={<LocalFloristIcon />} />
         </div>
         <div className={classes.propertyPrice}>
           <Chip
@@ -121,7 +120,25 @@ const Anuncio = props => {
       </Content>
       <div className="overlay">
         <div className="text">
-          <Chip label="VER DETALLES" icon={<Eye />}></Chip>
+          <Chip
+            label="VER DETALLES"
+            icon={<Eye />}
+            style={{ width: "157px" }}
+          ></Chip>
+          {props.username && props.username === props.created_by ? (
+            <>
+              <Chip
+                label="EDITAR ANUNCIO"
+                icon={<EditIcon />}
+                style={{ width: "157px" }}
+              />
+              <Chip
+                label="BORRAR ANUNCIO"
+                icon={<DeleteIcon />}
+                style={{ width: "157px" }}
+              />
+            </>
+          ) : null}
         </div>
       </div>
     </Card>
