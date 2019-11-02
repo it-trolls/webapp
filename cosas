@@ -10,3 +10,6 @@ Orquestadores (jenkins)
 lambda
 agregar en google developer tools.
 google bussiness
+grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: "Logo Navigation Navigation Navigation" ". Title Title ." ". Search Search .";

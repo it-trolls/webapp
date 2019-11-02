@@ -17,55 +17,7 @@ const Hero = styled.header`
   background-repeat: no-repeat;
   background-size: cover;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  grid-template-areas: "Logo Navigation Navigation Navigation" ". Title Title ." ". Search Search ." ". . . .";
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-`;
-
-const Navbar = styled.nav`
-  grid-area: Navigation;
-  margin-top: 25px;
-  padding-left: 25px;
-  padding-right: 15px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-`;
-
-const Logo = styled.a`
-  grid-area: Logo;
-  margin-top: 2rem;
-  padding-left: 25px;
-`;
-
-const Menu = styled.ul`
-  list-style: none;
-  display: flex;
-  color: white;
-  a {
-    text-decoration: none;
-    color: white;
-  }
-`;
-
-const MenuLink = styled.li`
-  background: none;
-  font-size: 1.1rem;
-  letter-spacing: 1.5px;
-  font-weight: 500;
-  :hover {
-    background: #ccc;
-  }
-  a {
-    display: inline-block;
-    padding: 10px 15px;
-    text-decoration: none;
-    color: black;
-  }
-  a:hover {
-    color: #333;
-  }
+  grid-template-columns: repeat(autofit, minmax(230px,1fr);
 `;
 
 const Title = styled.div`
@@ -74,38 +26,41 @@ const Title = styled.div`
   color: white;
 `;
 
-const Search = styled.div`
-  text-align: center;
-  grid-area: Search;
-  color: white;
-`;
-
 const hero = pros => {
   return (
     <Hero>
-      <Navbar>
-        <Menu>
-          <Button variant="outlined" color="inherit">
-            <NavLink to="/auth">Ingresar</NavLink>
-          </Button>
-        </Menu>
-      </Navbar>
-      <Title>
+      <div style={{ justifySelf: "flex-end", padding: "1rem" }}>
+        <Button
+          variant="outlined"
+          color="inherit"
+          style={{ borderColor: "white" }}
+        >
+          <NavLink to="/auth" style={{ color: "white" }}>
+            Ingresar
+          </NavLink>
+        </Button>
+      </div>
+      <Title
+        style={{
+          justifySelf: "center ",
+          padding: "1rem",
+          color: "white",
+          textAlign: "center"
+        }}
+      >
         <Typography variant="h2" color="inherit" gutterBottom>
           <img src={logo} alt="Inmob logo" height="100px" />
         </Typography>
-        <Typography variant="h4" color="inherit">
+        <Typography variant="h4" color="inherit" gutterBottom>
           Inmobapp, encontra tu nuevo Hogar!
         </Typography>
-      </Title>
-      <Search>
         <Searchbar></Searchbar>
         <Button variant="outlined" color="inherit">
           <NavLink to="/dashboard" style={{ color: "white" }}>
             Ver todos los anuncios
           </NavLink>
         </Button>
-      </Search>
+      </Title>
     </Hero>
   );
 };

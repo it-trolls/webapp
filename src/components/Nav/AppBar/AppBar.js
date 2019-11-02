@@ -166,7 +166,9 @@ const ApplicationBar = props => {
           </>
         ) : (
           <NavLink to="auth">
-            <Button color="inherit">Ingresar</Button>
+            <Button color="inherit" style={{ color: "white" }}>
+              Ingresar
+            </Button>
           </NavLink>
         )}
       </Toolbar>
