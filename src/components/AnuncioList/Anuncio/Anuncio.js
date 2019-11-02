@@ -1,20 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
-import HotelIcon from "@material-ui/icons/Hotel";
-import LocalFloristIcon from "@material-ui/icons/LocalFlorist";
-import Eye from "@material-ui/icons/Visibility";
-import Chip from "@material-ui/core/Chip";
-import Kitchen from "@material-ui/icons/Kitchen";
-import Bathtub from "@material-ui/icons/Bathtub";
-import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
+import {
+  Delete,
+  Edit,
+  Hotel,
+  LocalFlorist,
+  Visibility,
+  Kitchen,
+  Bathtub,
+  MonetizationOn
+} from "@material-ui/icons";
+import { Chip } from "@material-ui/core/";
+import { NavLink } from "react-router-dom";
 import imagen from "../../../assets/citybg.jpg";
+import { Typography } from "antd";
 
 const Card = styled.div`
   width: 332px;
-  height: 460px;
+  height: 430px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   position: relative;
 
@@ -105,36 +109,38 @@ const Anuncio = props => {
           <h2>{props.title}</h2>
         </div>
         <div className={classes.propertyTags}>
-          <Chip label={props.rooms} icon={<HotelIcon />} />
+          <Chip label={props.rooms} icon={<Hotel />} />
           <Chip label={props.kitchen} icon={<Kitchen />} />
           <Chip label={props.bathrooms} icon={<Bathtub />} />
-          <Chip label={props.backyard} icon={<LocalFloristIcon />} />
+          <Chip label={props.backyard} icon={<LocalFlorist />} />
         </div>
         <div className={classes.propertyPrice}>
           <Chip
             variant="outline"
             label="$4000"
-            icon={<MonetizationOnIcon />}
+            icon={<MonetizationOn />}
           ></Chip>
         </div>
       </Content>
       <div className="overlay">
         <div className="text">
-          <Chip
-            label="VER DETALLES"
-            icon={<Eye />}
-            style={{ width: "157px" }}
-          ></Chip>
+          <NavLink to="/detalle">
+            <Chip
+              label="VER DETALLES"
+              icon={<Visibility />}
+              style={{ width: "157px", cursor: "pointer" }}
+            ></Chip>
+          </NavLink>
           {props.username && props.username === props.created_by ? (
             <>
               <Chip
                 label="EDITAR ANUNCIO"
-                icon={<EditIcon />}
+                icon={<Edit />}
                 style={{ width: "157px" }}
               />
               <Chip
                 label="BORRAR ANUNCIO"
-                icon={<DeleteIcon />}
+                icon={<Delete />}
                 style={{ width: "157px" }}
               />
             </>

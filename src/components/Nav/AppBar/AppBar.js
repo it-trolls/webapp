@@ -3,6 +3,7 @@ import { makeStyles, fade } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
@@ -122,44 +123,52 @@ const ApplicationBar = props => {
             inputProps={{ "aria-label": "search" }}
           />
         </div>
-        <div className={classes.sectionDesktop}>
-          <NavLink to="/nuevo" className={classes.title}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <NoteAddIcon />
-            </IconButton>
+        {props.authenticated ? (
+          <>
+            <div className={classes.sectionDesktop}>
+              <NavLink to="/nuevo" className={classes.title}>
+                <IconButton aria-label="show 4 new mails" color="inherit">
+                  <NoteAddIcon />
+                </IconButton>
+              </NavLink>
+              <NavLink to="/mensajes">
+                <IconButton
+                  aria-label="show 4 new mails"
+                  style={{ color: "white" }}
+                >
+                  <Badge badgeContent={4} color="secondary">
+                    <MailIcon />
+                  </Badge>
+                </IconButton>
+              </NavLink>
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={props.menuId}
+                aria-haspopup="true"
+                onClick={props.handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+            </div>
+            <div className={classes.sectionMobile}>
+              <IconButton
+                aria-label="show more"
+                aria-controls={props.mobileMenuId}
+                aria-haspopup="true"
+                onClick={props.handleMobileMenuOpen}
+                color="inherit"
+              >
+                <MoreIcon />
+              </IconButton>
+            </div>
+          </>
+        ) : (
+          <NavLink to="auth">
+            <Button color="inherit">Ingresar</Button>
           </NavLink>
-          <NavLink to="/mensajes">
-            <IconButton
-              aria-label="show 4 new mails"
-              style={{ color: "white" }}
-            >
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-          </NavLink>
-          <IconButton
-            edge="end"
-            aria-label="account of current user"
-            aria-controls={props.menuId}
-            aria-haspopup="true"
-            onClick={props.handleProfileMenuOpen}
-            color="inherit"
-          >
-            <AccountCircle />
-          </IconButton>
-        </div>
-        <div className={classes.sectionMobile}>
-          <IconButton
-            aria-label="show more"
-            aria-controls={props.mobileMenuId}
-            aria-haspopup="true"
-            onClick={props.handleMobileMenuOpen}
-            color="inherit"
-          >
-            <MoreIcon />
-          </IconButton>
-        </div>
+        )}
       </Toolbar>
     </AppBar>
   );

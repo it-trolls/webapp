@@ -18,7 +18,8 @@ const useStyles = makeStyles(theme => ({
     marginBottom: "2rem",
     padding: theme.spacing(3, 2),
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    boxShadow: "0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)"
   },
   textField: {
     margin: theme.spacing(1)
@@ -58,7 +59,7 @@ const CrearAnuncio = () => {
         <Container maxWidth="md">
           <Nav side={false} />
 
-          <Paper className={classes.root}>
+          <div className={classes.root}>
             <Typography variant="h5" component="h3" align="center">
               <img src={logo} alt="inmob app logo" height="64px" />
               Crear anuncio
@@ -189,7 +190,7 @@ const CrearAnuncio = () => {
                 Cancelar
               </Button>
             </form>
-          </Paper>
+          </div>
         </Container>
       </React.Fragment>
     </div>

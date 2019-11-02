@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, fade } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -8,52 +8,64 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Search from "@material-ui/icons/Search";
+import SearchIcon from "@material-ui/icons/Search";
+import InputBase from "@material-ui/core/InputBase";
 
 const useStyles = makeStyles(theme => ({
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1)
-  },
-  cssOutlinedInput: {
-    "&$cssFocused $notchedOutline": {
-      borderColor: `white !important`,
-      color: "white"
+  search: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.white, 0.25)
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    marginBottom: theme.spacing(2),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(3),
+      width: "auto"
     }
   },
-  notchedOutline: {
-    borderWidth: "2px",
-    borderColor: "white !important"
+  searchIcon: {
+    width: theme.spacing(7),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   },
-  cssLabel: {
-    color: "white"
+  inputRoot: {
+    color: "inherit"
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 7),
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: 200
+    }
   }
 }));
 
 const SearchBar = props => {
   const classes = useStyles();
   return (
-    <TextField
-      id="outlined-search"
-      type="search"
-      placeholder="¿Qué estas buscando?"
-      className={classes.textField}
-      InputProps={{
-        classes: {
-          root: classes.cssOutlinedInput,
-          notchedOutline: classes.notchedOutline,
-          input: classes.cssLabel,
-          focused: classes.cssLabel
-        },
-        startAdornment: (
-          <InputAdornment position="start" color="inherit">
-            <Search color="secondary" />
-          </InputAdornment>
-        )
-      }}
-      margin="normal"
-      variant="outlined"
-      fullWidth
-    />
+    <div className={classes.search}>
+      <div className={classes.searchIcon}>
+        <SearchIcon />
+      </div>
+      <InputBase
+        placeholder="¿Qué estas buscando?"
+        classes={{
+          root: classes.inputRoot,
+          input: classes.inputInput
+        }}
+        inputProps={{ "aria-label": "search" }}
+      />
+    </div>
   );
 };
 
