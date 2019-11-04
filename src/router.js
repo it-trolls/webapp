@@ -11,7 +11,8 @@ import Home from "./components/Home";
 import Auth from "./components/Auth";
 import Admin from "./components/Admin/Admin";
 import AnuncioDetalle from "./components/AnuncioDetalle/AnuncioDetalle";
-import CrearAnuncio from "./components/CrearAnuncio/CrearAnuncio";
+import CrearAnuncio from "./components/AnuncioCrear/AnuncioCrear";
+import Mensajes from "./components/MensajeList/MensajeList";
 import Nav from "./components/Nav/Nav";
 
 class Routes extends React.Component {
@@ -20,6 +21,7 @@ class Routes extends React.Component {
       <Router>
         <Switch>
           <Route path="/auth" component={Auth} />
+          <Route path="/mensajes" component={Mensajes} />
           <Route path="/admin" component={Admin} />
           <Route path="/detalle" component={AnuncioDetalle} />
           <Route
