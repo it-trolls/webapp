@@ -9,6 +9,7 @@ import {
   Typography
 } from "@material-ui/core";
 import { Comment, Delete, Visibility } from "@material-ui/icons";
+import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -48,10 +49,20 @@ const MensajeItem = props => {
         }
       />
       <ListItemSecondaryAction className={classes.actions}>
-        <IconButton edge="end" aria-label="ver">
+        <IconButton
+          edge="end"
+          aria-label="ver"
+          component={NavLink}
+          to="/mensajes/detalle"
+        >
           <Visibility />
         </IconButton>
-        <IconButton edge="end" aria-label="responder">
+        <IconButton
+          edge="end"
+          aria-label="responder"
+          component={NavLink}
+          to="/mensajes/nuevo"
+        >
           <Comment />
         </IconButton>
         <IconButton edge="end" aria-label="borrar">

@@ -136,9 +136,13 @@ const ApplicationBar = props => {
                   aria-label="show 4 new mails"
                   style={{ color: "white" }}
                 >
-                  <Badge badgeContent={4} color="secondary">
+                  {props.messages ? (
+                    <Badge badgeContent={props.messages} color="secondary">
+                      <MailIcon />
+                    </Badge>
+                  ) : (
                     <MailIcon />
-                  </Badge>
+                  )}
                 </IconButton>
               </NavLink>
               <IconButton

@@ -18,6 +18,7 @@ const Hero = styled.header`
   background-size: cover;
   display: grid;
   grid-template-columns: repeat(autofit, minmax(230px,1fr);
+  color: white;
 `;
 
 const Title = styled.div`
@@ -34,10 +35,11 @@ const hero = pros => {
           variant="outlined"
           color="inherit"
           style={{ borderColor: "white" }}
+          style={{ color: "white" }}
+          component={NavLink}
+          to="/auth"
         >
-          <NavLink to="/auth" style={{ color: "white" }}>
-            Ingresar
-          </NavLink>
+          Ingresar
         </Button>
       </div>
       <Title
@@ -55,10 +57,13 @@ const hero = pros => {
           Inmobapp, encontra tu nuevo Hogar!
         </Typography>
         <Searchbar></Searchbar>
-        <Button variant="outlined" color="inherit">
-          <NavLink to="/dashboard" style={{ color: "white" }}>
-            Ver todos los anuncios
-          </NavLink>
+        <Button
+          variant="outlined"
+          color="inherit"
+          component={NavLink}
+          to="/dashboard"
+        >
+          Ver todos los anuncios
         </Button>
       </Title>
     </Hero>
