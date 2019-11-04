@@ -13,6 +13,8 @@ import Admin from "./components/Admin/Admin";
 import AnuncioDetalle from "./components/AnuncioDetalle/AnuncioDetalle";
 import CrearAnuncio from "./components/AnuncioCrear/AnuncioCrear";
 import Mensajes from "./components/MensajeList/MensajeList";
+import CrearMensaje from "./components/MensajeCrear/MensajeCrear";
+import DetalleMensaje from "./components/MensajeDetalle/MensajeDetalle";
 import Nav from "./components/Nav/Nav";
 
 class Routes extends React.Component {
@@ -21,7 +23,9 @@ class Routes extends React.Component {
       <Router>
         <Switch>
           <Route path="/auth" component={Auth} />
-          <Route path="/mensajes" component={Mensajes} />
+          <Route path="/mensajes" exact component={Mensajes} />
+          <Route path="/mensajes/nuevo" component={CrearMensaje} />
+          <Route path="/mensajes/detalle" component={DetalleMensaje} />
           <Route path="/admin" component={Admin} />
           <Route path="/detalle" component={AnuncioDetalle} />
           <Route

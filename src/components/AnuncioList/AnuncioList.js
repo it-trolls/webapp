@@ -2,7 +2,7 @@ import React from "react";
 import Anuncio from "./Anuncio/Anuncio";
 import styled from "styled-components";
 import Side from "./SideMenu/Sidemenu";
-import Paper from "@material-ui/core/Paper";
+import { TablePagination } from "@material-ui/core/";
 import Nav from "../Nav/Nav";
 
 const Layout = styled.main`
@@ -36,6 +36,8 @@ const Grid = styled.div`
 `;
 
 const Dashboard = props => {
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [page, setPage] = React.useState(0);
   const handleDrawerToggle = () => {
     props.openSideBar();
   };
@@ -78,7 +80,14 @@ const Dashboard = props => {
       backyard: 0
     }
   ];
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
+  const handleChangeRowsPerPage = event => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
   return (
     <>
       <Layout>
@@ -105,6 +114,21 @@ const Dashboard = props => {
               />
             ))}
           </Grid>
+          <TablePagination
+            component="div"
+            page="0"
+            count="10"
+            rowsPerPage="10"
+            rowsPerPageOptions={[10, 25, 50]}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+            onChangePage={handleChangePage}
+            backIconButtonProps={{
+              "aria-label": "previous page"
+            }}
+            nextIconButtonProps={{
+              "aria-label": "next page"
+            }}
+          />
         </Content>
       </Layout>
     </>
