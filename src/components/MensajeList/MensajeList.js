@@ -18,6 +18,32 @@ const useStyles = makeStyles(theme => ({
 
 const MensajeList = props => {
   const classes = useStyles();
+  const messages = [
+    {
+      id: 1,
+      username: "Ismael",
+      message: "gpñaogjas poasjg opasj poagso jqpowjop qjowp oajsfp jqpwo ",
+      avatar: "http://lorempixel.com/200/100/"
+    },
+    {
+      id: 3,
+      username: "Porteño",
+      message: "gpñaogjas poaadsadsadsadas poagso jqpowjop qjowp oajsfp jqpwo ",
+      avatar: "http://lorempixel.com/200/100/"
+    },
+    {
+      id: 4,
+      username: "Gaston",
+      message: "gpñaogjasdpasj poagso jqpowjop qjowp oajsfp jqpwo ",
+      avatar: "http://lorempixel.com/200/100/"
+    },
+    {
+      id: 12,
+      username: "Roberto",
+      message: "gpñaogjas pasdasdqpowjop qjowp oajsfp jqpwo ",
+      avatar: "http://lorempixel.com/200/100/"
+    }
+  ];
   return (
     <div>
       <Nav />
@@ -27,13 +53,17 @@ const MensajeList = props => {
         </Typography>
         <Divider variant="inset" component="li" />
         <List className={classes.root}>
-          <Mensaje></Mensaje>
-          <Divider variant="inset" component="li" />
-          <Mensaje></Mensaje>
-          <Divider variant="inset" component="li" />
-          <Mensaje></Mensaje>
-          <Divider variant="inset" component="li" />
-          <Mensaje></Mensaje>
+          {messages.map(msg => (
+            <>
+              <Mensaje
+                id={msg.id}
+                username={msg.username}
+                avatar={msg.avatar}
+                message={msg.message}
+              />
+              <Divider variant="inset" component="li" />
+            </>
+          ))}
         </List>
       </Container>
     </div>

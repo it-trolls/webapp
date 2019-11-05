@@ -30,10 +30,10 @@ const MensajeItem = props => {
   return (
     <ListItem alignItems="flex-start">
       <ListItemAvatar>
-        <Avatar alt="Nombre del guazo" src="http://lorempixel.com/200/100/" />
+        <Avatar alt={props.username} src={props.avatar} />
       </ListItemAvatar>
       <ListItemText
-        primary="Sale partidazo capo, me hace falta un aguatero"
+        primary={props.title}
         secondary={
           <>
             <Typography
@@ -42,9 +42,9 @@ const MensajeItem = props => {
               className={classes.inline}
               color="textPrimary"
             >
-              Porteño alcahuete
+              {`${props.username}: `}
             </Typography>
-            {" — I'll be in your neighborhood doing errands this…"}
+            {props.message}
           </>
         }
       />
@@ -53,7 +53,7 @@ const MensajeItem = props => {
           edge="end"
           aria-label="ver"
           component={NavLink}
-          to="/mensajes/detalle"
+          to={`/mensajes/${props.id}`}
         >
           <Visibility />
         </IconButton>
@@ -61,11 +61,16 @@ const MensajeItem = props => {
           edge="end"
           aria-label="responder"
           component={NavLink}
-          to="/mensajes/nuevo"
+          to={`/mensajes/nuevo/${props.id}`}
         >
           <Comment />
         </IconButton>
-        <IconButton edge="end" aria-label="borrar">
+        <IconButton
+          edge="end"
+          aria-label="borrar"
+          component={NavLink}
+          to={`/mensajes/delete/${props.id}`}
+        >
           <Delete />
         </IconButton>
       </ListItemSecondaryAction>

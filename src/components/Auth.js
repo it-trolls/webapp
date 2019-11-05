@@ -34,12 +34,12 @@ class Auth extends React.Component {
   onSubmit = payload => {
     if (this.state.login) {
       axios
-        .post("localhost:3010/auth/login", payload)
+        .post("localhost:3010/api/v1/users", payload)
         .then(res => {
           console.log("Authenticato");
         })
         .catch(err => console.log(err));
-      this.props.history.push("/dashboard");
+      //this.props.history.push("/dashboard");
     } else {
       axios
         .post("localhost:3010/auth/register", payload)

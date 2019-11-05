@@ -1,7 +1,13 @@
-export const SIGN_UP = "SIGN_UP";
-export const SIGN_IN = "SIGN_IN";
-export const GET_ERRORS = "GET_ERRORS";
-export const LOGOUT_USER = "LOGOUT_USER";
+export const AUTH_START = "AUTH_START";
+export const AUTH_SUCESS = "AUTH_SUCESS";
+export const AUTH_FAIL = "AUTH_FAIL";
+export const AUTH_LOGOUT = "AUTH_LOGOUT";
+export const AUTH_SIGNUP = "AUTH_SIGNUP";
 
 export const SIDEBAR_OPEN = "SIDEBAR_OPEN";
 export const SIDEBAR_CLOSE = "SIDEBAR_CLOSE";
+
+export const GET_ANUNCIOS_SUCESS = "GET_ANUNCIOS_SUCESS";
+export const GET_ANUNCIO_SUCESS = "GET_ANUNCIO_SUCESS";
+export const GET_MESSAGES_SUCESS = "GET_MESSAGES_SUCESS";
+export const GET_MESSAGE_SUCESS = "GET_MESSAGE_SUCESS";
