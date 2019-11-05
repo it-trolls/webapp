@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import logo from "../../../assets/logoblue.jpeg";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { ListSubheader } from "@material-ui/core";
+import { NavLink } from "react-router-dom";
 
 const SideMenu = styled.div`
   margin-top: 2.5rem;
@@ -109,13 +110,28 @@ const Sidemenu = props => {
           <ListItemText primary="Tipo de inmueble" />
         </ListItem>
         <List dense component="div" disablePadding>
-          <ListItem button className={classes.nested}>
+          <ListItem
+            button
+            component={NavLink}
+            to="/dashboard?type=casa"
+            className={classes.nested}
+          >
             <ListItemText primary="Casa" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem
+            button
+            component={NavLink}
+            to="/dashboard?type=depto"
+            className={classes.nested}
+          >
             <ListItemText primary="Departamento" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem
+            button
+            component={NavLink}
+            to="/dashboard?type=oficina"
+            className={classes.nested}
+          >
             <ListItemText primary="Oficina" />
           </ListItem>
         </List>
@@ -123,13 +139,28 @@ const Sidemenu = props => {
           <ListItemText primary="Cantidad de habitaciones" />
         </ListItem>
         <List dense component="div" disablePadding>
-          <ListItem button className={classes.nested}>
+          <ListItem
+            button
+            component={NavLink}
+            to="/dashboard?size=1"
+            className={classes.nested}
+          >
             <ListItemText primary="Monoambiente" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem
+            button
+            component={NavLink}
+            to="/dashboard?size=2"
+            className={classes.nested}
+          >
             <ListItemText primary="Dos habitaciones" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem
+            button
+            component={NavLink}
+            to="/dashboard?size=3"
+            className={classes.nested}
+          >
             <ListItemText primary="Más de dos" />
           </ListItem>
         </List>
@@ -137,48 +168,34 @@ const Sidemenu = props => {
           <ListItemText primary="Ubicación" />
         </ListItem>
         <List dense component="div">
-          <ListItem button className={classes.nested}>
+          <ListItem
+            button
+            component={NavLink}
+            to="/dashboard?location=centro"
+            className={classes.nested}
+          >
             <ListItemText primary="Centro" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem
+            button
+            component={NavLink}
+            to="/dashboard?location=micro"
+            className={classes.nested}
+          >
             <ListItemText primary="Microcentro" />
           </ListItem>
-          <ListItem button className={classes.nested}>
+          <ListItem
+            button
+            component={NavLink}
+            to="/dashboard?location=macro"
+            className={classes.nested}
+          >
             <ListItemText primary="Macrocentro" />
           </ListItem>
         </List>
       </List>
     </div>
   );
-  // <SideMenu>
-  //   <Category>Ordenar publicaciones</Category>
-
-  //   <Category>Tipo de inmueble</Category>
-  //   <List>
-  //     <Filter>Casa</Filter>
-  //     <Filter>Departamento</Filter>
-  //     <Filter>Oficina</Filter>
-  //   </List>
-  //   <Category>Cantidad de habitaciones</Category>
-  //   <List>
-  //     <Filter>Monoambiente</Filter>
-  //     <Filter>1 habitacion</Filter>
-  //     <Filter>2 habitaciones</Filter>
-  //     <Filter>Mas de 2 habitaciones</Filter>
-  //   </List>
-  //   <Category>Ubicación</Category>
-  //   <List>
-  //     <Filter>Centro</Filter>
-  //     <Filter>Microcentro</Filter>
-  //     <Filter>Macrocentro</Filter>
-  //   </List>
-  //   <Category>Precio</Category>
-  //   <List>
-  //     <Filter>Caro</Filter>
-  //     <Filter>Muy Caro</Filter>
-  //     <Filter>Carisimo</Filter>
-  //   </List>
-  // </SideMenu>
   return (
     <nav className={classes.drawer} aria-label="mailbox folders">
       {/* The implementation can be swapped with js to avoid SEO duplication of links. */}

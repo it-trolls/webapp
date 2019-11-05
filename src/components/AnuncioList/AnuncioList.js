@@ -3,6 +3,7 @@ import Anuncio from "./Anuncio/Anuncio";
 import styled from "styled-components";
 import Side from "./SideMenu/Sidemenu";
 import { TablePagination } from "@material-ui/core/";
+import { useQuery } from "../queryHelper";
 import Nav from "../Nav/Nav";
 
 const Layout = styled.main`
@@ -36,12 +37,13 @@ const Grid = styled.div`
 `;
 
 const Dashboard = props => {
+  const query = useQuery();
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [page, setPage] = React.useState(0);
   const handleDrawerToggle = () => {
     props.openSideBar();
   };
-
+  console.log(query.get("name"));
   const list = [
     {
       title: "Departamento 1",

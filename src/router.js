@@ -9,7 +9,6 @@ import * as actions from "./store/actions/userActions";
 import Dashboard from "./components/AnuncioList/AnuncioList";
 import Home from "./components/Home";
 import Auth from "./components/Auth";
-import Admin from "./components/Admin/Admin";
 import AnuncioDetalle from "./components/AnuncioDetalle/AnuncioDetalle";
 import CrearAnuncio from "./components/AnuncioCrear/AnuncioCrear";
 import Mensajes from "./components/MensajeList/MensajeList";
@@ -26,7 +25,6 @@ class Routes extends React.Component {
           <Route path="/mensajes" exact component={Mensajes} />
           <Route path="/mensajes/nuevo" component={CrearMensaje} />
           <Route path="/mensajes/detalle" component={DetalleMensaje} />
-          <Route path="/admin" component={Admin} />
           <Route path="/detalle" component={AnuncioDetalle} />
           <Route
             path="/dashboard"

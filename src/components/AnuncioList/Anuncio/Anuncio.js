@@ -14,7 +14,6 @@ import {
 import { Chip } from "@material-ui/core/";
 import { NavLink } from "react-router-dom";
 import imagen from "../../../assets/citybg.jpg";
-import { Typography } from "antd";
 
 const Card = styled.div`
   width: 332px;
