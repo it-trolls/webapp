@@ -1,11 +1,21 @@
 import React from "react";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import PropTypes from "prop-types";
+import {
+  Typography,
+  Container,
+  TextField,
+  Button,
+  FormControlLabel,
+  Checkbox,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Divider
+} from "@material-ui/core";
 import logo from "../../assets/logo.png";
 import Nav from "../Nav/Nav";
+import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { DropzoneArea } from "material-ui-dropzone";
 
@@ -27,174 +37,249 @@ const useStyles = makeStyles(theme => ({
   button: {
     float: "right",
     margin: theme.spacing(1)
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120
   }
 }));
 
 const CrearAnuncio = () => {
   const classes = useStyles();
   const [values, setValues] = React.useState({
+    title: "",
+    description: "",
+    status: "",
+    type: "",
+    price: 0,
+    antiquity: 0,
+    coveredArea: 0,
     address: "",
-    location: "",
-    realState: "5d6ca80c5d042120e472436f",
-    price: "",
-    descripcion:
-      "adress, location y realState son obligatorios, tal vez ponerle el currency a el price como atributto",
-    state: "available",
-    garden: "true",
-    antiquity: "2",
-    coveredArea: "24",
     neighborhood: "",
-    bathrooms: "2",
-    berdrooms: "4",
-    type: "house",
-    images: []
+    floor: "",
+    kitchen: 0,
+    bathrooms: 2,
+    backyard: false,
+    rooms: 2,
+    image: ""
   });
 
   const handleChange = name => event => {
-    setValues({ ...values, [name]: event.target.value });
+    if (event.target.type === "checkbox") {
+      setValues({ ...values, [name]: event.target.checked });
+    } else {
+      setValues({ ...values, [name]: event.target.value });
+    }
+  };
+
+  const onSubmit = e => {
+    e.preventDefault();
+    console.log("Submiting");
+    console.log(values);
   };
   return (
-    <div>
-      <React.Fragment>
-        <Container maxWidth="md">
-          <Nav side={false} />
+    <>
+      <Container maxWidth="md">
+        <Nav side={false} />
 
-          <div className={classes.root}>
-            <Typography variant="h5" component="h3" align="center">
-              <img src={logo} alt="inmob app logo" height="64px" />
-              Crear anuncio
-            </Typography>
+        <div className={classes.root}>
+          <Typography variant="h5" component="h3" align="center">
+            <img src={logo} alt="Inmob app logo" height="64px" />
+            Crear anuncio
+          </Typography>
 
-            <form className={classes.container} noValidate autoComplete="off">
-              <TextField
-                id="standard-full-width"
-                label="Titulo"
-                value={values.address}
-                fullWidth
-                margin="normal"
-                className={classes.textField}
-              />
-              <TextField
-                id="standard-multiline-flexible"
-                label="Descripción"
-                multiline
-                rowsMax="4"
-                value={values.multiline}
-                onChange={handleChange("multiline")}
-                className={classes.textField}
-                margin="normal"
-                fullWidth
-              />
-              <TextField
-                id="standard-address"
-                label="Direccion"
-                className={classes.textField}
-                value={values.address}
-                onChange={handleChange("address")}
-                margin="normal"
-              />
-              <TextField
-                id="standard-neighborhood"
-                label="Barrio"
-                className={classes.textField}
-                value={values.neighborhood}
-                onChange={handleChange("neighborhood")}
-                margin="normal"
-              />
-              <TextField
-                id="standard-location"
-                label="Ciudad"
-                className={classes.textField}
-                value={values.location}
-                onChange={handleChange("location")}
-                margin="normal"
-              />
-              <TextField
-                id="standard-number"
-                label="Codigo Postal"
-                value={values.age}
-                onChange={handleChange("age")}
-                type="number"
-                className={classes.textField}
-                margin="normal"
-              />
-              <TextField
-                id="standard-number"
-                label="Piso"
-                value={values.age}
-                onChange={handleChange("age")}
-                type="text"
-                className={classes.textField}
-                margin="normal"
-              />
-              <TextField
-                id="standard-number"
-                label="Habitaciones"
-                value={values.age}
-                onChange={handleChange("age")}
-                type="number"
-                className={classes.textField}
-                margin="normal"
-              />
-              <TextField
-                id="standard-number"
-                label="Baños"
-                value={values.age}
-                onChange={handleChange("age")}
-                type="number"
-                className={classes.textField}
-                margin="normal"
-              />
-              <TextField
-                id="standard-number"
-                label="Cocinas"
-                value={values.age}
-                onChange={handleChange("age")}
-                type="number"
-                className={classes.textField}
-                margin="normal"
-              />
-              <TextField
-                id="standard-number"
-                label="Patios"
-                value={values.age}
-                onChange={handleChange("age")}
-                type="number"
-                className={classes.textField}
-                margin="normal"
-              />
-              <TextField
-                id="standard-number"
-                label="Terrazas"
-                value={values.age}
-                onChange={handleChange("age")}
-                type="number"
-                className={classes.textField}
-                margin="normal"
-              />
-
-              <DropzoneArea />
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                className={classes.button}
+          <form
+            className={classes.container}
+            noValidate
+            autoComplete="off"
+            onSubmit={onSubmit}
+          >
+            <TextField
+              id="standard-full-width"
+              label="Titulo"
+              value={values.title}
+              onChange={handleChange("title")}
+              fullWidth
+              margin="normal"
+              className={classes.textField}
+            />
+            <TextField
+              id="standard-multiline-flexible"
+              label="Descripción"
+              multiline
+              rowsMax="4"
+              value={values.description}
+              onChange={handleChange("description")}
+              className={classes.textField}
+              margin="normal"
+              fullWidth
+            />
+            <Divider />
+            <FormControl className={classes.formControl}>
+              <InputLabel htmlFor="simple-status">Contrato</InputLabel>
+              <Select
+                value={values.status}
+                onChange={handleChange("status")}
+                inputProps={{
+                  name: "status",
+                  id: "status-simple"
+                }}
               >
-                Crear
-              </Button>
-              <Button
-                variant="contained"
-                color="secondary"
-                className={classes.button}
+                <MenuItem value={"lease"}>Alquiler</MenuItem>
+                <MenuItem value={"sell"}>Venta</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl className={classes.formControl}>
+              <InputLabel htmlFor="simple-type">Inmueble</InputLabel>
+              <Select
+                value={values.type}
+                onChange={handleChange("type")}
+                inputProps={{
+                  name: "type",
+                  id: "status-type"
+                }}
               >
-                Cancelar
-              </Button>
-            </form>
-          </div>
-        </Container>
-      </React.Fragment>
-    </div>
+                <MenuItem value={"apartment"}>Departamento</MenuItem>
+                <MenuItem value={"house"}>Casa</MenuItem>
+                <MenuItem value={"office"}>Oficina</MenuItem>
+              </Select>
+            </FormControl>
+            <TextField
+              id="standard-price"
+              label="Precio"
+              value={values.price}
+              onChange={handleChange("price")}
+              type="number"
+              className={classes.textField}
+              margin="normal"
+            />
+            <Divider />
+            <TextField
+              id="standard-address"
+              label="Direccion"
+              className={classes.textField}
+              value={values.address}
+              onChange={handleChange("address")}
+              margin="normal"
+            />
+            <TextField
+              id="standard-neighborhood"
+              label="Barrio"
+              className={classes.textField}
+              value={values.neighborhood}
+              onChange={handleChange("neighborhood")}
+              margin="normal"
+            />
+
+            <TextField
+              id="standard-floor"
+              label="Piso"
+              value={values.floor}
+              onChange={handleChange("floor")}
+              type="text"
+              className={classes.textField}
+              margin="normal"
+            />
+            <Divider />
+            <TextField
+              id="standard-coveredArea"
+              label="Metros cuadrados"
+              value={values.coveredArea}
+              onChange={handleChange("coveredArea")}
+              type="number"
+              className={classes.textField}
+              margin="normal"
+            />
+            <TextField
+              id="standard-antiquity"
+              label="Antiguedad"
+              value={values.antiquity}
+              onChange={handleChange("antiquity")}
+              type="number"
+              className={classes.textField}
+              margin="normal"
+            />
+            <TextField
+              id="standard-rooms"
+              label="Habitaciones"
+              value={values.rooms}
+              onChange={handleChange("rooms")}
+              type="number"
+              className={classes.textField}
+              margin="normal"
+            />
+            <TextField
+              id="standard-bathrooms"
+              label="Baños"
+              value={values.bathrooms}
+              onChange={handleChange("bathrooms")}
+              type="number"
+              className={classes.textField}
+              margin="normal"
+            />
+            <TextField
+              id="standard-kitchen"
+              label="Cocinas"
+              value={values.kitchen}
+              onChange={handleChange("kitchen")}
+              type="number"
+              className={classes.textField}
+              margin="normal"
+            />
+
+            <FormControlLabel
+              className={classes.textField}
+              control={
+                <Checkbox
+                  checked={values.backyard}
+                  onChange={handleChange("backyard")}
+                  value={values.backyard}
+                  color="primary"
+                />
+              }
+              label="Patio"
+            />
+            <Divider />
+            <DropzoneArea />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className={classes.button}
+            >
+              Crear
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              className={classes.button}
+              component={NavLink}
+              to="main/dashboard"
+            >
+              Cancelar
+            </Button>
+          </form>
+        </div>
+      </Container>
+    </>
   );
+};
+
+CrearAnuncio.propTypes = {
+  edit: PropTypes.bool,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  status: PropTypes.string,
+  type: PropTypes.string,
+  address: PropTypes.string,
+  neighborhood: PropTypes.string,
+  rooms: PropTypes.number,
+  floor: PropTypes.string,
+  kitchen: PropTypes.number,
+  bathrooms: PropTypes.number,
+  backyard: PropTypes.bool,
+  antiquity: PropTypes.number,
+  coveredArea: PropTypes.number
 };
 
 export default CrearAnuncio;

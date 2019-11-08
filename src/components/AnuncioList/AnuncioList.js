@@ -44,6 +44,7 @@ const Dashboard = props => {
     props.openSideBar();
   };
   console.log(query.get("name"));
+
   const list = [
     {
       title: "Departamento 1",

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -96,7 +97,7 @@ const Anuncio = props => {
   return (
     <Card>
       <img
-        src={imagen}
+        src={props.image}
         alt={props.title + " image"}
         style={{ height: "60%", width: "332px", backgroundSize: "cover" }}
       />
@@ -116,14 +117,14 @@ const Anuncio = props => {
         <div className={classes.propertyPrice}>
           <Chip
             variant="outline"
-            label="$4000"
+            label={props.price}
             icon={<MonetizationOn />}
           ></Chip>
         </div>
       </Content>
       <div className="overlay">
         <div className="text">
-          <NavLink to="/detalle">
+          <NavLink to={`main/dashboard/${props.id}`}>
             <Chip
               label="VER DETALLES"
               icon={<Visibility />}
@@ -132,22 +133,40 @@ const Anuncio = props => {
           </NavLink>
           {props.username && props.username === props.created_by ? (
             <>
-              <Chip
-                label="EDITAR ANUNCIO"
-                icon={<Edit />}
-                style={{ width: "157px" }}
-              />
-              <Chip
-                label="BORRAR ANUNCIO"
-                icon={<Delete />}
-                style={{ width: "157px" }}
-              />
+              <NavLink to={`main/dashboard/edit/${props.id}`}>
+                <Chip
+                  label="EDITAR ANUNCIO"
+                  icon={<Edit />}
+                  style={{ width: "157px" }}
+                />
+              </NavLink>
+              <NavLink to={`main/dashboard/borrar/${props.id}`}>
+                <Chip
+                  label="BORRAR ANUNCIO"
+                  icon={<Delete />}
+                  style={{ width: "157px" }}
+                />
+              </NavLink>
             </>
           ) : null}
         </div>
       </div>
     </Card>
   );
+};
+
+Anuncio.propTypes = {
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+  rooms: PropTypes.number.isRequired,
+  kitchen: PropTypes.number.isRequired,
+  bathrooms: PropTypes.number.isRequired,
+  backyard: PropTypes.number.isRequired,
+  price: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
+  created_by: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired
 };
 
 export default Anuncio;

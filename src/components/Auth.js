@@ -34,7 +34,7 @@ class Auth extends React.Component {
   onSubmit = payload => {
     if (this.state.login) {
       axios
-        .post("localhost:3010/api/v1/users", payload)
+        .post("http://localhost:3010/api/v1/auth/login", payload)
         .then(res => {
           console.log("Authenticato");
         })

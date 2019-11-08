@@ -6,50 +6,49 @@ import Searchbar from "../Searchbar/Searchbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { NavLink } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 
-const Hero = styled.header`
-  min-height: 100vh;
-  width: 100%;
-  overflow-x: hidden;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url(${background});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: grid;
-  grid-template-columns: repeat(autofit, minmax(230px,1fr);
-  color: white;
-`;
+const useStyles = makeStyles(theme => ({
+  header: {
+    minHeight: "100vh",
+    overflow: "hidden",
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(${background})`,
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    display: "grid",
+    gridTemplateColumns: "repeat(autofit, minmax(230px, 1fr))",
+    color: "white"
+  },
+  nav: {
+    justifySelf: "flex-end",
+    padding: "1rem"
+  },
+  title: {
+    justifySelf: "center ",
+    padding: "1rem",
+    color: "white",
+    textAlign: "center"
+  }
+}));
 
-const Title = styled.div`
-  text-align: center;
-  grid-area: Title;
-  color: white;
-`;
-
-const hero = pros => {
+const Hero = props => {
+  const classes = useStyles();
   return (
-    <Hero>
-      <div style={{ justifySelf: "flex-end", padding: "1rem" }}>
+    <div className={classes.header}>
+      <div className={classes.nav}>
         <Button
           variant="outlined"
           color="inherit"
-          style={{ borderColor: "white" }}
-          style={{ color: "white" }}
+          style={{ borderColor: "white", color: "white" }}
           component={NavLink}
           to="/auth"
         >
           Ingresar
         </Button>
       </div>
-      <Title
-        style={{
-          justifySelf: "center ",
-          padding: "1rem",
-          color: "white",
-          textAlign: "center"
-        }}
-      >
+      <div className={classes.title}>
         <Typography variant="h2" color="inherit" gutterBottom>
           <img src={logo} alt="Inmob logo" height="100px" />
         </Typography>
@@ -65,9 +64,9 @@ const hero = pros => {
         >
           Ver todos los anuncios
         </Button>
-      </Title>
-    </Hero>
+      </div>
+    </div>
   );
 };
 
-export default hero;
+export default Hero;
