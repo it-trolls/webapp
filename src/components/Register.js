@@ -45,8 +45,10 @@ const Register = props => {
   const handleSubmit = e => {
     e.preventDefault();
     const payload = {
+      username: user,
       email: email,
-      password: password
+      password: password,
+      passwordConfirmation: password2
     };
     props.onSubmit(payload);
   };

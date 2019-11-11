@@ -103,6 +103,8 @@ const Dashboard = props => {
             side={true}
             sideBar={props.sideBar}
             openSideBar={props.openSideBar}
+            isAuthenticated={props.isAuthenticated}
+            logout={props.logout}
           />
           <Grid>
             {list.map(item => (

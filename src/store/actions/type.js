@@ -6,6 +6,8 @@ export const AUTH_SIGNUP = "AUTH_SIGNUP";
 
 export const SIDEBAR_OPEN = "SIDEBAR_OPEN";
 export const SIDEBAR_CLOSE = "SIDEBAR_CLOSE";
+export const SHOW_NAV = "SHOW_NAV";
+export const HIDE_NAV = "HIDE_NAV";
 
 export const GET_ANUNCIOS_SUCESS = "GET_ANUNCIOS_SUCESS";
 export const GET_ANUNCIO_SUCESS = "GET_ANUNCIO_SUCESS";

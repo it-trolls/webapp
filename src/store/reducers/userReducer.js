@@ -2,7 +2,9 @@ import {
   AUTH_START,
   AUTH_SUCESS,
   AUTH_FAIL,
-  AUTH_LOGOUT
+  AUTH_LOGOUT,
+  SHOW_NAV,
+  HIDE_NAV
 } from "../actions/type";
 import { updateObject } from "../helper";
 
@@ -12,7 +14,8 @@ const initialState = {
   loading: false,
   username: null,
   is_admin: null,
-  sideBar: false
+  sideBar: false,
+  showingNav: false
 };
 
 const authStart = (state, action) => {
@@ -44,6 +47,17 @@ const authLogout = (state, action) => {
   });
 };
 
+const showNav = (state, action) => {
+  return updateObject(state, {
+    showingNav: true
+  });
+};
+const hideNav = (state, action) => {
+  return updateObject(state, {
+    showingNav: false
+  });
+};
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case AUTH_START:
@@ -54,6 +68,10 @@ export default (state = initialState, action) => {
       return authFail(state, action);
     case AUTH_LOGOUT:
       return authLogout(state, action);
+    case SHOW_NAV:
+      return showNav(state, action);
+    case HIDE_NAV:
+      return hideNav(state, action);
     default:
       return state;
   }

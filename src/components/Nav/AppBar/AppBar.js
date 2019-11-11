@@ -123,7 +123,7 @@ const ApplicationBar = props => {
             inputProps={{ "aria-label": "search" }}
           />
         </div>
-        {props.authenticated ? (
+        {props.isAuthenticated ? (
           <>
             <div className={classes.sectionDesktop}>
               <NavLink to="/nuevo" className={classes.title}>

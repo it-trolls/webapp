@@ -4,7 +4,7 @@ import axios from "axios";
 import Login from "./Login";
 import Register from "./Register";
 import bg from "../assets/houseinside.jpg";
-
+import { Redirect } from "react-router-dom";
 const Container = styled.div`
   font-family: "Roboto", sans-serif;
   height: 100vh;
@@ -26,48 +26,37 @@ const Card = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-class Auth extends React.Component {
-  state = {
-    login: true
+const Auth = props => {
+  const [login, setLogin] = React.useState(true);
+
+  const toggleAuth = () => {
+    setLogin(!login);
   };
 
-  onSubmit = payload => {
-    if (this.state.login) {
-      axios
-        .post("http://localhost:3010/api/v1/auth/login", payload)
-        .then(res => {
-          console.log("Authenticato");
-        })
-        .catch(err => console.log(err));
-      //this.props.history.push("/dashboard");
+  const onSubmit = payload => {
+    if (login) {
+      props.onLogin(payload);
     } else {
-      axios
-        .post("localhost:3010/auth/register", payload)
-        .then(res => console.log("Registrado"))
-        .catch(err => console.log(err));
+      console.log(payload);
+      props.onRegister(payload);
     }
   };
 
-  render() {
-    const display = this.state.login ? (
-      <Login
-        onToggle={() => this.setState({ login: !this.state.login })}
-        onSubmit={payload => this.onSubmit(payload)}
-      />
-    ) : (
-      <Register
-        onToggle={() => this.setState({ login: !this.state.login })}
-        onSubmit={payload => this.onSubmit(payload)}
-      />
-    );
-    return (
-      <Container>
-        <Panel>
-          <Card>{display}</Card>
-        </Panel>
-      </Container>
-    );
-  }
-}
+  const display = login ? (
+    <Login onToggle={toggleAuth} onSubmit={payload => onSubmit(payload)} />
+  ) : (
+    <Register onToggle={toggleAuth} onSubmit={payload => onSubmit(payload)} />
+  );
+
+  return props.isAuthenticated ? (
+    <Redirect to="dashboard" />
+  ) : (
+    <Container>
+      <Panel>
+        <Card>{display}</Card>
+      </Panel>
+    </Container>
+  );
+};
 
 export default Auth;

@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
 /** Redux */
 import { connect } from "react-redux";
 import * as actions from "./store/actions/userActions";
@@ -14,14 +13,21 @@ import CrearAnuncio from "./components/AnuncioCrear/AnuncioCrear";
 import Mensajes from "./components/MensajeList/MensajeList";
 import CrearMensaje from "./components/MensajeCrear/MensajeCrear";
 import DetalleMensaje from "./components/MensajeDetalle/MensajeDetalle";
-import Nav from "./components/Nav/Nav";
-
 class Routes extends React.Component {
   render() {
     return (
       <Router>
         <Switch>
-          <Route path="/auth" component={Auth} />
+          <Route
+            path="/auth"
+            component={() => (
+              <Auth
+                onLogin={this.props.onLogin}
+                onRegister={this.props.onRegister}
+                isAuthenticated={this.props.isAuthenticated}
+              />
+            )}
+          />
           <Route path="/mensajes" exact component={Mensajes} />
           <Route path="/mensajes/nuevo" component={CrearMensaje} />
           <Route path="/mensajes/detalle" component={DetalleMensaje} />
@@ -32,6 +38,8 @@ class Routes extends React.Component {
               <Dashboard
                 sideBar={this.props.sideBar}
                 openSideBar={this.props.sideBarOpen}
+                isAuthenticated={this.props.isAuthenticated}
+                logout={this.props.onLogout}
               />
             )}
           />
@@ -44,14 +52,20 @@ class Routes extends React.Component {
 }
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.user.isAuthenticated,
+    isAuthenticated: state.user.token ? true : false,
+    showingNav: state.user.showingNav,
     sideBar: state.user.sideBar
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    sideBarOpen: () => dispatch(actions.openSideBar())
+    sideBarOpen: () => dispatch(actions.openSideBar()),
+    onLogin: payload => dispatch(actions.authLogin(payload)),
+    onRegister: payload => dispatch(actions.authSignup(payload)),
+    onLogout: () => dispatch(actions.authLogout()),
+    showNav: () => dispatch(actions.showNav()),
+    hideNav: () => dispatch(actions.hideNav())
   };
 };
 export default connect(

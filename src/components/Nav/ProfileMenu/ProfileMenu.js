@@ -15,7 +15,7 @@ const ProfileMenu = props => {
     >
       <MenuItem onClick={props.handleMenuClose}>Mis anuncios</MenuItem>
       <MenuItem onClick={props.handleMenuClose}>Perfil</MenuItem>
-      <MenuItem onClick={props.handleMenuClose}>Salir</MenuItem>
+      <MenuItem onClick={props.logout}>Salir</MenuItem>
     </Menu>
   );
 };

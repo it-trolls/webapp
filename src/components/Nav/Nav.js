@@ -51,7 +51,7 @@ const Nav = props => {
         handleMobileMenuOpen={handleMobileMenuOpen}
         openSideBar={openSideBar}
         side={props.side}
-        authenticated={true}
+        isAuthenticated={props.isAuthenticated}
       />
       <MobileMenu
         mobileMoreAnchorEl={mobileMoreAnchorEl}
@@ -67,6 +67,7 @@ const Nav = props => {
         isMenuOpen={isMenuOpen}
         handleMenuClose={handleMenuClose}
         handleProfileMenuOpen={handleProfileMenuOpen}
+        logout={props.logout}
       />
     </div>
   );
