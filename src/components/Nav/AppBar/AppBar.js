@@ -116,7 +116,7 @@ const ApplicationBar = props => {
         {props.isAuthenticated ? (
           <>
             <div className={classes.sectionDesktop}>
-              <NavLink to="/nuevo" className={classes.title}>
+              <NavLink to="/dashboard/nuevo" className={classes.title}>
                 <IconButton aria-label="show 4 new mails" color="inherit">
                   <NoteAddIcon />
                 </IconButton>

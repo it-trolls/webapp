@@ -18,7 +18,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { DropzoneArea } from "material-ui-dropzone";
 import * as apiActions from '../../store/actions/apiActions'
 import {useDispatch, useSelector} from 'react-redux';
-import {useHistory} from 'react-router-dom';
+import {useQuery} from '../queryHelper'
+import axios from 'axios'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -46,10 +47,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const CrearAnuncio = () => {
+  const query = useQuery();
   const classes = useStyles();
   const dispatch = useDispatch();
-  const history = useHistory();
   const token = useSelector(state => state.user.token)
+  const post = useSelector(state => state.api.post)
   const [values, setValues] = React.useState({
     title: "",
     description: "",
@@ -64,8 +66,8 @@ const CrearAnuncio = () => {
     kitchens: 0,
     bathrooms: 0,
     bedrooms: 0,
-    pictures: [],
-  });
+    pictures: [],}
+  );
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
@@ -73,11 +75,26 @@ const CrearAnuncio = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log("Submiting");
-    console.log(values);
-    dispatch(apiActions.createAnuncio(values, token))
+    if(query.get("id")){
+      dispatch(apiActions.createAnuncio(query.get("id"), values, token))
+    }else{
+      dispatch(apiActions.createAnuncio(values, token))
+    }
     //history.push('/dashboard')
   };
+
+  React.useEffect(()=> {
+    if(query.get("id")){
+      axios
+      .get(`http://localhost:3010/api/v1/properties/${query.get("id")}`)
+      .then(res => {
+        setValues({...res.data})
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    }
+  }, [])
   return (
     <>
       <Container maxWidth="md">
@@ -86,7 +103,7 @@ const CrearAnuncio = () => {
         <div className={classes.root}>
           <Typography variant="h5" component="h3" align="center">
             <img src={logo} alt="Inmob app logo" height="64px" />
-            Crear anuncio
+            {query.get("id") ? "Editar articulo" : "Crear anuncio"}
           </Typography>
 
           <form
@@ -94,6 +111,7 @@ const CrearAnuncio = () => {
             noValidate
             autoComplete="off"
             onSubmit={onSubmit}
+            encType="multipart/form-data"
           >
             <TextField
               id="standard-full-width"
@@ -238,7 +256,7 @@ const CrearAnuncio = () => {
               color="primary"
               className={classes.button}
             >
-              Crear
+              {query.get("id") ? "Editar" : "Crear"}
             </Button>
             <Button
               variant="contained"

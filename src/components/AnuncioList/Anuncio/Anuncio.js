@@ -133,7 +133,7 @@ const Anuncio = props => {
           </NavLink>
           {props.username && props.username === props.created_by ? (
             <>
-              <NavLink to={`dashboard/editar/${props.id}`}>
+              <NavLink to={`dashboard/nuevo?id=${props.id}`}>
                 <Chip
                   label="EDITAR ANUNCIO"
                   icon={<Edit />}

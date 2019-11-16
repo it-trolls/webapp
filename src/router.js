@@ -13,6 +13,7 @@ import CrearAnuncio from "./components/AnuncioCrear/AnuncioCrear";
 import Mensajes from "./components/MensajeList/MensajeList";
 import CrearMensaje from "./components/MensajeCrear/MensajeCrear";
 import DetalleMensaje from "./components/MensajeDetalle/MensajeDetalle";
+import BorrarArticulo from "./components/BorrarAnuncio/BorrarAnuncio"
 class Routes extends React.Component {
   render() {
     return (
@@ -31,7 +32,9 @@ class Routes extends React.Component {
           <Route path="/mensajes" exact component={Mensajes} />
           <Route path="/mensajes/nuevo" component={CrearMensaje} />
           <Route path="/mensajes/detalle" component={DetalleMensaje} />
+          <Route path="/dashboard/nuevo" component={CrearAnuncio} />
           <Route path="/dashboard/detalle" component={AnuncioDetalle} />
+          <Route path="/dashboard/borrar" component={BorrarArticulo} />
           <Route
             path="/dashboard"
             component={() => (
@@ -43,7 +46,6 @@ class Routes extends React.Component {
               />
             )}
           />
-          <Route path="/nuevo" component={CrearAnuncio} />
           <Route path="/" exact component={Home} />
         </Switch>
       </Router>

@@ -52,22 +52,43 @@ export const getAnuncios = query => {
 };
 
 export const getAnuncio = id => {
+  console.log(id)
   return dispatch => {
     axios
-      .get(`${id}`)
+      .get(`http://localhost:3010/api/v1/properties/${id}`)
       .then(res => {
-        dispatch(getAnuncio());
+        dispatch(getAnuncioSucess(res.data));
       })
       .catch(error => {
-        dispatch(getAnuncios());
+        dispatch(getAnunciosSucess(error));
+      });
+  };
+};
+export const updateAnuncio = (id, payload, token) => {
+  const headers = {
+    'Content-Type': 'application/json',
+    'x-access-token': token
+  }
+  return dispatch => {
+    axios
+      .put(`http://localhost:3010/api/v1/properties/${id}`,payload,{"headers": headers})
+      .then(res => {
+        dispatch(getAnuncioSucess(res.data));
+      })
+      .catch(error => {
+        dispatch(getAnunciosSucess(error));
       });
   };
 };
 
-export const deleteAnuncio = id => {
+export const deleteAnuncio = (id, token) => {
+  const headers = {
+    'Content-Type': 'application/json',
+    'x-access-token': token
+  }
   return dispatch => {
     axios
-      .delete(`${id}`)
+      .delete(`http://localhost:3010/api/v1/properties/${id}`,{"headers": headers})
       .then(res => {
         dispatch(getAnuncios());
       })
