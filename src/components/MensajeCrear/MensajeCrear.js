@@ -26,18 +26,24 @@ const useStyles = makeStyles(theme => ({
 
 const MensajeCrear = props => {
   const classes = useStyles();
-  const [value, setValue] = React.useState("Controlled");
+  const [value, setValue] = React.useState({
+    
+  });
 
   const handleChange = event => {
     setValue(event.target.value);
   };
+
+  const onSubmit = e => {
+    e.preventDefault();
+
+  }
   return (
     <>
       <Nav />
-
       <Container maxWidth="md" className={classes.container}>
         <Paper>
-          <form className={classes.form}>
+          <form className={classes.form} onSubmit={onSubmit}>
             <Typography variant="h4" gutterBottom>
               <Email />{" "}
               {props.answer ? "Responder mensaje" : "Escribir mensaje"}

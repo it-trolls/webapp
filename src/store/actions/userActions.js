@@ -54,7 +54,7 @@ export const authLogin = payload => {
     dispatch(authStart());
     axios
       .post("http://localhost:3010/api/v1/auth/login", {
-        email: payload.username,
+        username: payload.email,
         password: payload.password
       })
       .then(res => {

@@ -43,10 +43,9 @@ const Login = props => {
   const handleSubmit = e => {
     e.preventDefault();
     const payload = {
-      username: user,
+      email: user,
       password: password
     };
-    console.log(payload);
     props.onSubmit(payload);
   };
   return (
@@ -58,7 +57,7 @@ const Login = props => {
       <TextField
         className={classes.margin}
         id="input-with-icon-textfield"
-        label="Usuario"
+        label="Email"
         value={user}
         onChange={e => setUser(e.target.value)}
         InputProps={{

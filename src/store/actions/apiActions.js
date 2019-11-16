@@ -34,16 +34,19 @@ export const getMessageSucess = message => {
   };
 };
 
-export const getAnuncios = () => {
+export const getAnuncios = query => {
+  const url = query
+    ? `http://localhost:3010/api/v1/properties?${query}`
+    : "http://localhost:3010/api/v1/properties/";
   return dispatch => {
     axios
-      .get("")
+      .get(url)
       .then(res => {
         dispatch(getAnunciosSucess(res.data));
       })
       .catch(err => {
         //dispatch(getAnunciosFail(error))
-        console.log(error);
+        console.log(err);
       });
   };
 };
@@ -74,10 +77,15 @@ export const deleteAnuncio = id => {
   };
 };
 
-export const createAnuncio = payload => {
+export const createAnuncio = (payload, token) => {
+  console.log(token)
+  const headers = {
+    'Content-Type': 'application/json',
+    'x-access-token': token
+  }
   return dispatch => {
     axios
-      .post(`${id}`, payload)
+      .post(`http://localhost:3010/api/v1/properties/`, payload,  {"headers": headers})
       .then(res => {
         dispatch(getAnuncios());
       })
@@ -96,7 +104,7 @@ export const getMessages = id => {
       })
       .catch(err => {
         //dispatch(getMessagesFail(error))
-        console.log(error);
+        console.log(err);
       });
   };
 };
@@ -130,7 +138,7 @@ export const deleteMessage = id => {
 export const createMessage = payload => {
   return dispatch => {
     axios
-      .post(`${id}`, payload)
+      .post(`${payload.id}`, payload)
       .then(res => {
         dispatch(getMessages());
       })

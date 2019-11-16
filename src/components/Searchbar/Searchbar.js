@@ -1,13 +1,6 @@
 import React from "react";
 import { makeStyles, fade } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import Search from "@material-ui/icons/Search";
+import { useHistory } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 
@@ -52,8 +45,17 @@ const useStyles = makeStyles(theme => ({
 
 const SearchBar = props => {
   const classes = useStyles();
+  const [search, setSearch] = React.useState("");
+  const history = useHistory();
+
+  const onSubmit = e => {
+    e.preventDefault();
+    if (search.length >= 3) {
+      history.push(`/dashboard?search=${search}`);
+    }
+  };
   return (
-    <div className={classes.search}>
+    <form className={classes.search} onSubmit={onSubmit}>
       <div className={classes.searchIcon}>
         <SearchIcon />
       </div>
@@ -63,9 +65,11 @@ const SearchBar = props => {
           root: classes.inputRoot,
           input: classes.inputInput
         }}
+        value={search}
+        onChange={e => setSearch(e.target.value)}
         inputProps={{ "aria-label": "search" }}
       />
-    </div>
+    </form>
   );
 };
 

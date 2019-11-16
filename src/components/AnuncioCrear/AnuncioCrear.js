@@ -5,8 +5,6 @@ import {
   Container,
   TextField,
   Button,
-  FormControlLabel,
-  Checkbox,
   FormControl,
   InputLabel,
   Select,
@@ -18,6 +16,9 @@ import Nav from "../Nav/Nav";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { DropzoneArea } from "material-ui-dropzone";
+import * as apiActions from '../../store/actions/apiActions'
+import {useDispatch, useSelector} from 'react-redux';
+import {useHistory} from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -46,10 +47,13 @@ const useStyles = makeStyles(theme => ({
 
 const CrearAnuncio = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const token = useSelector(state => state.user.token)
   const [values, setValues] = React.useState({
     title: "",
     description: "",
-    status: "",
+    contract: "",
     type: "",
     price: 0,
     antiquity: 0,
@@ -57,25 +61,22 @@ const CrearAnuncio = () => {
     address: "",
     neighborhood: "",
     floor: "",
-    kitchen: 0,
-    bathrooms: 2,
-    backyard: false,
-    rooms: 2,
-    image: ""
+    kitchens: 0,
+    bathrooms: 0,
+    bedrooms: 0,
+    pictures: [],
   });
 
   const handleChange = name => event => {
-    if (event.target.type === "checkbox") {
-      setValues({ ...values, [name]: event.target.checked });
-    } else {
-      setValues({ ...values, [name]: event.target.value });
-    }
+    setValues({ ...values, [name]: event.target.value });
   };
 
   const onSubmit = e => {
     e.preventDefault();
     console.log("Submiting");
     console.log(values);
+    dispatch(apiActions.createAnuncio(values, token))
+    //history.push('/dashboard')
   };
   return (
     <>
@@ -118,14 +119,14 @@ const CrearAnuncio = () => {
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="simple-status">Contrato</InputLabel>
               <Select
-                value={values.status}
-                onChange={handleChange("status")}
+                value={values.contract}
+                onChange={handleChange("contract")}
                 inputProps={{
-                  name: "status",
-                  id: "status-simple"
+                  name: "contract",
+                  id: "contract-simple"
                 }}
               >
-                <MenuItem value={"lease"}>Alquiler</MenuItem>
+                <MenuItem value={"rental"}>Alquiler</MenuItem>
                 <MenuItem value={"sell"}>Venta</MenuItem>
               </Select>
             </FormControl>
@@ -139,7 +140,7 @@ const CrearAnuncio = () => {
                   id: "status-type"
                 }}
               >
-                <MenuItem value={"apartment"}>Departamento</MenuItem>
+                <MenuItem value={"department"}>Departamento</MenuItem>
                 <MenuItem value={"house"}>Casa</MenuItem>
                 <MenuItem value={"office"}>Oficina</MenuItem>
               </Select>
@@ -200,10 +201,10 @@ const CrearAnuncio = () => {
               margin="normal"
             />
             <TextField
-              id="standard-rooms"
+              id="standard-bedrooms"
               label="Habitaciones"
-              value={values.rooms}
-              onChange={handleChange("rooms")}
+              value={values.bedrooms}
+              onChange={handleChange("bedrooms")}
               type="number"
               className={classes.textField}
               margin="normal"
@@ -218,29 +219,19 @@ const CrearAnuncio = () => {
               margin="normal"
             />
             <TextField
-              id="standard-kitchen"
+              id="standard-kitchens"
               label="Cocinas"
-              value={values.kitchen}
-              onChange={handleChange("kitchen")}
+              value={values.kitchens}
+              onChange={handleChange("kitchens")}
               type="number"
               className={classes.textField}
               margin="normal"
             />
 
-            <FormControlLabel
-              className={classes.textField}
-              control={
-                <Checkbox
-                  checked={values.backyard}
-                  onChange={handleChange("backyard")}
-                  value={values.backyard}
-                  color="primary"
-                />
-              }
-              label="Patio"
-            />
             <Divider />
-            <DropzoneArea />
+            <DropzoneArea 
+            acceptedFiles={['image/*']}
+            onChange={e => setValues({...values, "pictures" : e})} />
             <Button
               type="submit"
               variant="contained"

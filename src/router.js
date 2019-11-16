@@ -31,7 +31,7 @@ class Routes extends React.Component {
           <Route path="/mensajes" exact component={Mensajes} />
           <Route path="/mensajes/nuevo" component={CrearMensaje} />
           <Route path="/mensajes/detalle" component={DetalleMensaje} />
-          <Route path="/detalle" component={AnuncioDetalle} />
+          <Route path="/dashboard/detalle" component={AnuncioDetalle} />
           <Route
             path="/dashboard"
             component={() => (
@@ -54,7 +54,9 @@ const mapStateToProps = state => {
   return {
     isAuthenticated: state.user.token ? true : false,
     showingNav: state.user.showingNav,
-    sideBar: state.user.sideBar
+    sideBar: state.user.sideBar,
+    posts: state.api.posts,
+    messages: state.api.messages
   };
 };
 
@@ -68,7 +70,4 @@ const mapDispatchToProps = dispatch => {
     hideNav: () => dispatch(actions.hideNav())
   };
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Routes);
+export default connect(mapStateToProps, mapDispatchToProps)(Routes);

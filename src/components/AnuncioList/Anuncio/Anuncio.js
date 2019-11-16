@@ -97,20 +97,20 @@ const Anuncio = props => {
   return (
     <Card>
       <img
-        src={props.image}
+        src={props.picture}
         alt={props.title + " image"}
         style={{ height: "60%", width: "332px", backgroundSize: "cover" }}
       />
       <Content>
         <div className={classes.propertyState}>
-          <Chip label={props.status} color="primary" />
+          <Chip label={props.contract === 'rental' ? 'Alquiler' : 'Venta'} color="primary" />
         </div>
         <div className="title">
           <h2>{props.title}</h2>
         </div>
         <div className={classes.propertyTags}>
-          <Chip label={props.rooms} icon={<Hotel />} />
-          <Chip label={props.kitchen} icon={<Kitchen />} />
+          <Chip label={props.bedrooms} icon={<Hotel />} />
+          <Chip label={props.kitchens} icon={<Kitchen />} />
           <Chip label={props.bathrooms} icon={<Bathtub />} />
           <Chip label={props.backyard} icon={<LocalFlorist />} />
         </div>
@@ -124,7 +124,7 @@ const Anuncio = props => {
       </Content>
       <div className="overlay">
         <div className="text">
-          <NavLink to={`main/dashboard/${props.id}`}>
+          <NavLink to={`dashboard/detalle?id=${props.id}`}>
             <Chip
               label="VER DETALLES"
               icon={<Visibility />}
@@ -133,14 +133,14 @@ const Anuncio = props => {
           </NavLink>
           {props.username && props.username === props.created_by ? (
             <>
-              <NavLink to={`main/dashboard/edit/${props.id}`}>
+              <NavLink to={`dashboard/editar/${props.id}`}>
                 <Chip
                   label="EDITAR ANUNCIO"
                   icon={<Edit />}
                   style={{ width: "157px" }}
                 />
               </NavLink>
-              <NavLink to={`main/dashboard/borrar/${props.id}`}>
+              <NavLink to={`dashboard/borrar/${props.id}`}>
                 <Chip
                   label="BORRAR ANUNCIO"
                   icon={<Delete />}

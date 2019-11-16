@@ -4,7 +4,9 @@ import styled from "styled-components";
 import Side from "./SideMenu/Sidemenu";
 import { TablePagination } from "@material-ui/core/";
 import { useQuery } from "../queryHelper";
+import { useSelector, useDispatch } from "react-redux";
 import Nav from "../Nav/Nav";
+import axios from "axios";
 
 const Layout = styled.main`
   margin-top: 4rem;
@@ -39,50 +41,30 @@ const Grid = styled.div`
 const Dashboard = props => {
   const query = useQuery();
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [page, setPage] = React.useState(0);
+  const [page, setPage] = React.useState(null);
+  const [posts, setPosts] = React.useState([]);
+  const dispatch = useDispatch();
+
   const handleDrawerToggle = () => {
     props.openSideBar();
   };
-  console.log(query.get("name"));
 
-  const list = [
-    {
-      title: "Departamento 1",
-      status: "En Alquiler",
-      price: 3000,
-      rooms: 2,
-      bathrooms: 2,
-      kitchen: 1,
-      backyard: 0
-    },
-    {
-      title: "Casa 1",
-      status: "En Alquiler",
-      price: 7500,
-      rooms: 2,
-      bathrooms: 2,
-      kitchen: 1,
-      backyard: 0
-    },
-    {
-      title: "Casa 1",
-      status: "En venta",
-      price: 1000000,
-      rooms: 2,
-      bathrooms: 2,
-      kitchen: 1,
-      backyard: 0
-    },
-    {
-      title: "Oficina muy bonita",
-      status: "En Alquiler",
-      price: 5000,
-      rooms: 2,
-      bathrooms: 2,
-      kitchen: 1,
-      backyard: 0
-    }
-  ];
+  React.useEffect(() => {
+    const url =
+      query.toString().length > 3
+        ? `http://localhost:3010/api/v1/properties?${query}`
+        : "http://localhost:3010/api/v1/properties/";
+    axios
+      .get(url)
+      .then(res => {
+        setPosts(res.data);
+      })
+      .catch(err => {
+        //dispatch(getAnunciosFail(error))
+        console.log(err);
+      });
+  }, []);
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -107,23 +89,24 @@ const Dashboard = props => {
             logout={props.logout}
           />
           <Grid>
-            {list.map(item => (
+            {posts.map(item => (
               <Anuncio
+                id={item._id}
                 title={item.title}
-                status={item.status}
+                contract={item.contract}
                 price={item.price}
-                rooms={item.rooms}
+                bedrooms={item.bedrooms}
                 bathrooms={item.bathrooms}
-                kitchen={item.kitchen}
+                kitchens={item.kitchens}
                 backyard={item.backyard}
               />
             ))}
           </Grid>
-          <TablePagination
+          {/* <TablePagination
             component="div"
-            page="0"
+            page={page}
             count="10"
-            rowsPerPage="10"
+            rowsPerPage={rowsPerPage}
             rowsPerPageOptions={[10, 25, 50]}
             onChangeRowsPerPage={handleChangeRowsPerPage}
             onChangePage={handleChangePage}
@@ -133,7 +116,7 @@ const Dashboard = props => {
             nextIconButtonProps={{
               "aria-label": "next page"
             }}
-          />
+          /> */}
         </Content>
       </Layout>
     </>

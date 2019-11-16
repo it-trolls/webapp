@@ -13,8 +13,9 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NoteAddIcon from "@material-ui/icons/NoteAdd";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import logo from "../../../assets/logo.png";
+import Search from "../../Searchbar/Searchbar";
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
@@ -90,6 +91,7 @@ const useStyles = makeStyles(theme => ({
 
 const ApplicationBar = props => {
   const classes = useStyles();
+
   const hamb = props.side ? (
     <IconButton
       edge="start"
@@ -110,19 +112,7 @@ const ApplicationBar = props => {
             <img src={logo} alt="Inmobapp logo" height="64px" />
           </NavLink>
         </Typography>
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
-          </div>
-          <InputBase
-            placeholder="Buscar propiedad..."
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput
-            }}
-            inputProps={{ "aria-label": "search" }}
-          />
-        </div>
+        <Search />
         {props.isAuthenticated ? (
           <>
             <div className={classes.sectionDesktop}>

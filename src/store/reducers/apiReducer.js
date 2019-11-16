@@ -35,7 +35,7 @@ const getMessageSucess = (state, action) => {
   });
 };
 
-export const reducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case GET_ANUNCIOS_SUCESS:
       return getAnunciosSucess(state, action);
@@ -45,5 +45,7 @@ export const reducer = (state = initialState, action) => {
       return getMessagesSucess(state, action);
     case GET_MESSAGE_SUCESS:
       return getMessageSucess(state, action);
+    default:
+      return state;
   }
 };

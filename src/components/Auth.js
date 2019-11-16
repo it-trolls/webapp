@@ -35,9 +35,9 @@ const Auth = props => {
 
   const onSubmit = payload => {
     if (login) {
+      console.log(payload);
       props.onLogin(payload);
     } else {
-      console.log(payload);
       props.onRegister(payload);
     }
   };
