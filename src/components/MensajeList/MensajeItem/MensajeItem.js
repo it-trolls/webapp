@@ -53,7 +53,7 @@ const MensajeItem = props => {
           edge="end"
           aria-label="ver"
           component={NavLink}
-          to={`/mensajes/${props.id}`}
+          to={`/mensajes/nuevo?to=${props.userid}`}
         >
           <Visibility />
         </IconButton>

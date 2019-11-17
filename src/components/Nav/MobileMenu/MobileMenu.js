@@ -1,14 +1,13 @@
 import React from "react";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import Badge from "@material-ui/core/Badge";
-import IconButton from "@material-ui/core/IconButton";
-import NoteAddIcon from "@material-ui/icons/NoteAdd";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+import { Menu, MenuItem, Badge, IconButton } from "@material-ui/core";
+import { NoteAdd, AccountCircle, Mail} from "@material-ui/icons";
 import { NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux"
+import * as userActions from "../../../store/actions/userActions";
+
 const MobileMenu = props => {
+  const token = useSelector(state => state.user.token)
+  const dispatch = useDispatch();
   return (
     <Menu
       anchorEl={props.mobileMoreAnchorEl}
@@ -19,40 +18,43 @@ const MobileMenu = props => {
       open={props.isMobileMenuOpen}
       onClose={props.handleMobileMenuClose}
     >
+      <NavLink to="/dashboard/nuevo">
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <NoteAddIcon />
+        <IconButton aria-label="crear anuncio" color="inherit">
+          <NoteAdd />
         </IconButton>
-        <NavLink to="/nuevo">
           <p>Crear anuncio</p>
-        </NavLink>
       </MenuItem>
+      </NavLink>
+      <NavLink to={`/dashboard?created_by=${token}`}>
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Mensajes</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notificaciones</p>
-      </MenuItem>
-      <MenuItem onClick={props.handleProfileMenuOpen}>
         <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
+          aria-label="mis anuncios"
           color="inherit"
         >
           <AccountCircle />
         </IconButton>
-        <p>Perfil</p>
+        <p>Mis anuncios</p>
+      </MenuItem>
+      </NavLink>
+      <NavLink to="/mensajes">
+      <MenuItem>
+        <IconButton aria-label="mostrar mensajes" color="inherit">
+          <Badge color="secondary">
+            <Mail />
+          </Badge>
+        </IconButton>
+        <p>Mensajes</p>
+      </MenuItem>
+      </NavLink>
+      <MenuItem onClick={() => dispatch( userActions.authLogout())}>
+        <IconButton
+          aria-label="Salir"
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+        <p>Salir</p>
       </MenuItem>
     </Menu>
   );

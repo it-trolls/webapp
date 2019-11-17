@@ -99,7 +99,6 @@ export const deleteAnuncio = (id, token) => {
 };
 
 export const createAnuncio = (payload, token) => {
-  console.log(token)
   const headers = {
     'Content-Type': 'application/json',
     'x-access-token': token
@@ -156,10 +155,14 @@ export const deleteMessage = id => {
   };
 };
 
-export const createMessage = payload => {
+export const createMessage = (message, id, token) => {
+  const headers = {
+    'Content-Type': 'application/json',
+    'x-access-token': token
+  }
   return dispatch => {
     axios
-      .post(`${payload.id}`, payload)
+      .post(``, {"message": message, "id": id}, {"headers": headers})
       .then(res => {
         dispatch(getMessages());
       })

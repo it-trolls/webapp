@@ -12,6 +12,7 @@ const useStyles = makeStyles(theme => ({
 
 const Nav = props => {
   const classes = useStyles();
+  
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -35,13 +36,10 @@ const Nav = props => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const openSideBar = () => {
-    props.openSideBar();
-  };
-
   const menuId = "primary-search-account-menu";
   const mobileMenuId = "primary-search-account-menu-mobile";
 
+  
   return (
     <div className={classes.grow}>
       <AppBar
@@ -49,9 +47,6 @@ const Nav = props => {
         handleProfileMenuOpen={handleProfileMenuOpen}
         mobileMenuId={mobileMenuId}
         handleMobileMenuOpen={handleMobileMenuOpen}
-        openSideBar={openSideBar}
-        side={props.side}
-        isAuthenticated={props.isAuthenticated}
       />
       <MobileMenu
         mobileMoreAnchorEl={mobileMoreAnchorEl}
@@ -67,7 +62,6 @@ const Nav = props => {
         isMenuOpen={isMenuOpen}
         handleMenuClose={handleMenuClose}
         handleProfileMenuOpen={handleProfileMenuOpen}
-        logout={props.logout}
       />
     </div>
   );

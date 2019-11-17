@@ -1,38 +1,32 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import Lock from "@material-ui/icons/Lock";
-import Email from "@material-ui/icons/Email";
+import { makeStyles, TextField, Button, InputAdornment } from "@material-ui/core/";
+import {AccountCircle, Lock, Email} from "@material-ui/icons/";
 import logo from "../assets/logoblue.jpeg";
-
-const Form = styled.form`
-  width: 450px;
-  border-radius: 2px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 1);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-`;
-
-const Title = styled.h2`
-  text-align: center;
-  margin: 15px;
-  margin-bottom: 2rem;
-`;
-
-const Logo = styled.img`
-  height: 110px;
-`;
 
 const useStyles = makeStyles(theme => ({
   margin: {
     margin: theme.spacing(1)
+  },
+  form: {
+    width: "300px",
+    borderRadius: "2px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    padding: "20px",
+    backgroundColor: "whitesmoke",
+    boxShadow: "0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23)",
+    [theme.breakpoints.down("sm")]: {
+      width: "260px",
+    }
+  },
+  title: {
+    textAlign: "center",
+    margin: "15px",
+    marginBottom: "2rem",
+  },
+  logo:{
+    height: "110px",
   }
 }));
 
@@ -54,11 +48,11 @@ const Register = props => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <form className={classes.form} onSubmit={handleSubmit}>
       <div style={{ textAlign: "center" }}>
-        <Logo src={logo} alt="Inmobapp logo" />
+        <img className={classes.logo} src={logo} alt="Inmobapp logo" />
       </div>
-      <Title>Unirse a Inmobapp!</Title>
+      <h1 className={classes.title}>Unirse a Inmobapp!</h1>
       <TextField
         className={classes.margin}
         id="input-with-icon-textfield"
@@ -136,7 +130,7 @@ const Register = props => {
       >
         Ingresar
       </Button>
-    </Form>
+    </form>
   );
 };
 

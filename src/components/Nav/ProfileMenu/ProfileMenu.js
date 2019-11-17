@@ -1,8 +1,13 @@
 import React from "react";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import {useDispatch, useSelector} from "react-redux";
+import * as userActions from "../../../store/actions/userActions";
+import {NavLink} from "react-router-dom";
 
 const ProfileMenu = props => {
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.user.token);
   return (
     <Menu
       anchorEl={props.anchorEl}
@@ -13,9 +18,10 @@ const ProfileMenu = props => {
       open={props.isMenuOpen}
       onClose={props.handleMenuClose}
     >
-      <MenuItem onClick={props.handleMenuClose}>Mis anuncios</MenuItem>
-      <MenuItem onClick={props.handleMenuClose}>Perfil</MenuItem>
-      <MenuItem onClick={props.logout}>Salir</MenuItem>
+      <NavLink to={`/dashboard?created_by=${token}`}>
+        <MenuItem onClick={props.handleMenuClose}>Mis anuncios</MenuItem>
+      </NavLink>
+      <MenuItem onClick={() => dispatch(userActions.authLogout())}>Salir</MenuItem>
     </Menu>
   );
 };

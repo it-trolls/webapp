@@ -58,7 +58,6 @@ const DetalleAnuncio = props => {
 
   return (
     <>
-      <Nav side={true} />
       <Layout>
         <div className="top">
           <div className="images">
@@ -96,7 +95,7 @@ const DetalleAnuncio = props => {
                 frameborder="0"
               ></iframe>
             </div>
-            <NavLink to="/mensajes/nuevo?id=asdasd">
+            <NavLink to={`/mensajes/nuevo?id=${props.created_by}`}>
             <Button variant="contained" color="primary" fullWidth>
               Consultar
             </Button>

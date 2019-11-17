@@ -1,21 +1,11 @@
 import React from "react";
 import { makeStyles, fade } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import InputBase from "@material-ui/core/InputBase";
-import Badge from "@material-ui/core/Badge";
-import MenuIcon from "@material-ui/icons/Menu";
-import SearchIcon from "@material-ui/icons/Search";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
-import NoteAddIcon from "@material-ui/icons/NoteAdd";
-import MoreIcon from "@material-ui/icons/MoreVert";
+import { AppBar, Toolbar, IconButton, Button, Typography, Badge} from "@material-ui/core"
+import {Menu, AccountCircle, Mail, NoteAdd, MoreVert} from "@material-ui/icons"
 import { NavLink, useHistory } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import Search from "../../Searchbar/Searchbar";
+import { useDispatch, useSelector} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
   menuButton: {
@@ -26,11 +16,8 @@ const useStyles = makeStyles(theme => ({
     }
   },
   title: {
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "block",
-      color: "white"
-    }
+    display: "block",
+    color: "white",
   },
   search: {
     position: "relative",
@@ -91,47 +78,36 @@ const useStyles = makeStyles(theme => ({
 
 const ApplicationBar = props => {
   const classes = useStyles();
-
-  const hamb = props.side ? (
-    <IconButton
-      edge="start"
-      className={classes.menuButton}
-      color="inherit"
-      aria-label="open drawer"
-      onClick={props.openSideBar}
-    >
-      <MenuIcon />
-    </IconButton>
-  ) : null;
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.user.token)
   return (
     <AppBar className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
-        {hamb}
-        <Typography className={classes.title} variant="h6" noWrap>
+        <Typography className={classes.title} variant="h6" noWrap edge="start">
           <NavLink to="/dashboard">
-            <img src={logo} alt="Inmobapp logo" height="64px" />
+            <img src={logo} alt="Inmobapp logo" height="60px" />
           </NavLink>
         </Typography>
         <Search />
-        {props.isAuthenticated ? (
+        {token ? (
           <>
             <div className={classes.sectionDesktop}>
               <NavLink to="/dashboard/nuevo" className={classes.title}>
-                <IconButton aria-label="show 4 new mails" color="inherit">
-                  <NoteAddIcon />
+                <IconButton aria-label="crear anuncio" color="inherit">
+                  <NoteAdd />
                 </IconButton>
               </NavLink>
               <NavLink to="/mensajes">
                 <IconButton
-                  aria-label="show 4 new mails"
+                  aria-label="ver mensajes"
                   style={{ color: "white" }}
                 >
                   {props.messages ? (
-                    <Badge badgeContent={props.messages} color="secondary">
-                      <MailIcon />
+                    <Badge color="secondary">
+                      <Mail />
                     </Badge>
                   ) : (
-                    <MailIcon />
+                    <Mail />
                   )}
                 </IconButton>
               </NavLink>
@@ -154,7 +130,7 @@ const ApplicationBar = props => {
                 onClick={props.handleMobileMenuOpen}
                 color="inherit"
               >
-                <MoreIcon />
+                <MoreVert />
               </IconButton>
             </div>
           </>

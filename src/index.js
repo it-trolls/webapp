@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Router from "./router";
+import App from "./App"
 import { Provider } from "react-redux";
 import store from "./store";
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router />
+    <App style={{ fontFamily: "Roboto, sans-serif;"}} />
   </Provider>,
   document.getElementById("root")
 );

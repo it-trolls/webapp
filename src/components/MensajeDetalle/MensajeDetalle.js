@@ -17,8 +17,6 @@ const MensajeDetalle = props => {
   const classes = useStyles();
   return (
     <>
-      <Nav />
-
       <Container maxWidth="md" className={classes.container}>
         <Paper>
           <Typography variant="h4" gutterBottom>

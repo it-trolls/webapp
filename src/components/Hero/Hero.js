@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-
+import {useSelector} from 'react-redux';
 const useStyles = makeStyles(theme => ({
   header: {
     minHeight: "100vh",
@@ -30,15 +30,20 @@ const useStyles = makeStyles(theme => ({
     padding: "1rem",
     color: "white",
     textAlign: "center"
+  },
+  button: {
+    marginTop: theme.spacing(3),
   }
 }));
 
 const Hero = props => {
   const classes = useStyles();
+   const token = useSelector(state => state.user.token)
+
   return (
     <div className={classes.header}>
       <div className={classes.nav}>
-        <Button
+        {token ? null : <Button
           variant="outlined"
           color="inherit"
           style={{ borderColor: "white", color: "white" }}
@@ -47,6 +52,8 @@ const Hero = props => {
         >
           Ingresar
         </Button>
+        }
+        
       </div>
       <div className={classes.title}>
         <Typography variant="h2" color="inherit" gutterBottom>
@@ -61,6 +68,7 @@ const Hero = props => {
           color="inherit"
           component={NavLink}
           to="/dashboard"
+          className={classes.button}
         >
           Ver todos los anuncios
         </Button>

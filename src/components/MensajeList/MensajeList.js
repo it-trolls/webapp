@@ -4,6 +4,7 @@ import Mensaje from "./MensajeItem/MensajeItem";
 import { Container, List, Divider, Typography, Icon } from "@material-ui/core";
 import { Email } from "@material-ui/icons/";
 import { makeStyles } from "@material-ui/core/styles";
+import { useDispatch, useSelector } from "react-redux"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,32 +19,8 @@ const useStyles = makeStyles(theme => ({
 
 const MensajeList = props => {
   const classes = useStyles();
-  const messages = [
-    {
-      id: 1,
-      username: "Ismael",
-      message: "gpñaogjas poasjg opasj poagso jqpowjop qjowp oajsfp jqpwo ",
-      avatar: "http://lorempixel.com/200/100/"
-    },
-    {
-      id: 3,
-      username: "Porteño",
-      message: "gpñaogjas poaadsadsadsadas poagso jqpowjop qjowp oajsfp jqpwo ",
-      avatar: "http://lorempixel.com/200/100/"
-    },
-    {
-      id: 4,
-      username: "Gaston",
-      message: "gpñaogjasdpasj poagso jqpowjop qjowp oajsfp jqpwo ",
-      avatar: "http://lorempixel.com/200/100/"
-    },
-    {
-      id: 12,
-      username: "Roberto",
-      message: "gpñaogjas pasdasdqpowjop qjowp oajsfp jqpwo ",
-      avatar: "http://lorempixel.com/200/100/"
-    }
-  ];
+  const dispatch = useDispatch();
+  const [messages, setMessages] = React.useState([])
   return (
     <div>
       <Nav />
@@ -57,6 +34,7 @@ const MensajeList = props => {
             <>
               <Mensaje
                 id={msg.id}
+                userid={msg.userid}
                 username={msg.username}
                 avatar={msg.avatar}
                 message={msg.message}

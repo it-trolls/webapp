@@ -4,11 +4,14 @@ import {
   Typography,
   Paper,
   TextField,
-  Button
+  Button, makeStyles
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import { Email } from "@material-ui/icons";
 import Nav from "../Nav/Nav";
+import {useQuery} from "../queryHelper";
+import {useDispatch, useSelector} from "react-redux"
+import {NavLink} from "react-router-dom"
+import * as apiActions from "../../store/actions/apiActions"
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -25,52 +28,49 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MensajeCrear = props => {
+  const query = useQuery(); 
   const classes = useStyles();
-  const [value, setValue] = React.useState({
-    
-  });
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.user.token);
+  const [value, setValue] = React.useState("");
 
   const handleChange = event => {
     setValue(event.target.value);
   };
 
-  const onSubmit = e => {
-    e.preventDefault();
-
+  const sendMessage = e => {
+    const id = query.get("id");
+    if(value.length > 8 && id) {
+      dispatch(apiActions.createMessage(value, id, token))
+    }
   }
   return (
     <>
-      <Nav />
       <Container maxWidth="md" className={classes.container}>
         <Paper>
-          <form className={classes.form} onSubmit={onSubmit}>
+          <form className={classes.form} onSubmit={sendMessage}>
             <Typography variant="h4" gutterBottom>
               <Email />{" "}
               {props.answer ? "Responder mensaje" : "Escribir mensaje"}
             </Typography>
             <TextField
-              id="standard-title"
-              className={classes.textField}
-              label="Titulo"
-              margin="normal"
-              value={value}
-              onChange={handleChange}
-            />
-            <TextField
               id="outlined-multiline-static"
               label="Mensaje"
               multiline
               rows="4"
+              value={value}
               defaultValue=""
               className={classes.textField}
               margin="normal"
               variant="outlined"
               onChange={handleChange}
             />
-            <Button variant="contained" color="secondary">
+            <NavLink to="/mensajes/">
+            <Button variant="contained" fullWidth>
               Cancelar
             </Button>
-            <Button variant="contained" color="primary" submit>
+            </NavLink>
+            <Button variant="contained" color="primary" type="submit">
               Enviar
             </Button>
           </form>

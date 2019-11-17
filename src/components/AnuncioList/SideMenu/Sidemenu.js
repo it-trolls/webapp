@@ -99,7 +99,7 @@ const Sidemenu = props => {
       </Typography>
       <Divider />
       <List
-        aria-labellebby="ordenar-anuncios"
+        aria-label="ordenar-anuncios"
         subheader={
           <ListSubheader component="div" id="ordenar-anuncios">
             Ordenar anuncios
@@ -115,6 +115,8 @@ const Sidemenu = props => {
             component={NavLink}
             to="/dashboard?type=casa"
             className={classes.nested}
+            onClick={props.handleDrawerToggle}
+
           >
             <ListItemText primary="Casa" />
           </ListItem>
@@ -123,6 +125,8 @@ const Sidemenu = props => {
             component={NavLink}
             to="/dashboard?type=depto"
             className={classes.nested}
+            onClick={props.handleDrawerToggle}
+
           >
             <ListItemText primary="Departamento" />
           </ListItem>
@@ -131,6 +135,8 @@ const Sidemenu = props => {
             component={NavLink}
             to="/dashboard?type=oficina"
             className={classes.nested}
+            onClick={props.handleDrawerToggle}
+
           >
             <ListItemText primary="Oficina" />
           </ListItem>
@@ -144,6 +150,8 @@ const Sidemenu = props => {
             component={NavLink}
             to="/dashboard?size=1"
             className={classes.nested}
+            onClick={props.handleDrawerToggle}
+
           >
             <ListItemText primary="Monoambiente" />
           </ListItem>
@@ -152,6 +160,8 @@ const Sidemenu = props => {
             component={NavLink}
             to="/dashboard?size=2"
             className={classes.nested}
+            onClick={props.handleDrawerToggle}
+
           >
             <ListItemText primary="Dos habitaciones" />
           </ListItem>
@@ -160,6 +170,8 @@ const Sidemenu = props => {
             component={NavLink}
             to="/dashboard?size=3"
             className={classes.nested}
+            onClick={props.handleDrawerToggle}
+
           >
             <ListItemText primary="Más de dos" />
           </ListItem>
@@ -173,6 +185,7 @@ const Sidemenu = props => {
             component={NavLink}
             to="/dashboard?location=centro"
             className={classes.nested}
+            onClick={props.handleDrawerToggle}
           >
             <ListItemText primary="Centro" />
           </ListItem>
@@ -181,6 +194,8 @@ const Sidemenu = props => {
             component={NavLink}
             to="/dashboard?location=micro"
             className={classes.nested}
+            onClick={props.handleDrawerToggle}
+
           >
             <ListItemText primary="Microcentro" />
           </ListItem>
@@ -189,6 +204,7 @@ const Sidemenu = props => {
             component={NavLink}
             to="/dashboard?location=macro"
             className={classes.nested}
+            onClick={props.handleDrawerToggle}
           >
             <ListItemText primary="Macrocentro" />
           </ListItem>

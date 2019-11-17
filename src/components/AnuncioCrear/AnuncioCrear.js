@@ -98,7 +98,6 @@ const CrearAnuncio = () => {
   return (
     <>
       <Container maxWidth="md">
-        <Nav side={false} />
 
         <div className={classes.root}>
           <Typography variant="h5" component="h3" align="center">

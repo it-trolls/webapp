@@ -2,9 +2,9 @@ import React from "react";
 import Anuncio from "./Anuncio/Anuncio";
 import styled from "styled-components";
 import Side from "./SideMenu/Sidemenu";
-import { TablePagination } from "@material-ui/core/";
 import { useQuery } from "../queryHelper";
 import { useSelector, useDispatch } from "react-redux";
+import { Button, makeStyles } from "@material-ui/core";
 import Nav from "../Nav/Nav";
 import axios from "axios";
 
@@ -38,11 +38,49 @@ const Grid = styled.div`
   }
 `;
 
+const useStyles = makeStyles(theme => ({
+  main: {
+    marginTop: "4rem",
+    paddingBottom: "1rem",
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    [theme.breakpoints.up("sm")]: {
+      flexDirection: "row"
+    }
+  },
+  content: {
+    flex: "80%",
+    margin: "2rem"
+  },
+  grid: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    [theme.breakpoints.up("sm")]: {
+      display: "grid",
+      gridTemplateColumns: "repeat(3, 1fr)",
+      gridTemplateRows: "repeat(2, 1fr)",
+      gridColumnGap: "15px",
+      gridRowGap: "10px",  
+    }
+  },
+  ordenarBtn: {
+    display: "none",
+    [theme.breakpoints.down("sm")]: {
+      display: "block"
+    }
+  }
+}))
+
 const Dashboard = props => {
+  const classes = useStyles();
   const query = useQuery();
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [page, setPage] = React.useState(null);
   const [posts, setPosts] = React.useState([]);
+  const [sidebar, setSidebar] = React.useState(false)
   const dispatch = useDispatch();
 
   const handleDrawerToggle = () => {
@@ -75,19 +113,14 @@ const Dashboard = props => {
   };
   return (
     <>
-      <Layout>
+      <main className={classes.main}>
         <Side
-          mobileOpen={props.sideBar}
-          handleDrawerToggle={handleDrawerToggle}
+          mobileOpen={sidebar}
+          handleDrawerToggle={() => setSidebar(false)}
         />
         <Content>
-          <Nav
-            side={true}
-            sideBar={props.sideBar}
-            openSideBar={props.openSideBar}
-            isAuthenticated={props.isAuthenticated}
-            logout={props.logout}
-          />
+          <Button className={classes.ordenarBtn} onClick={() => setSidebar(!sidebar)}>Ordenar</Button>
+          
           <Grid>
             {posts.map(item => (
               <Anuncio
@@ -98,6 +131,7 @@ const Dashboard = props => {
                 bedrooms={item.bedrooms}
                 bathrooms={item.bathrooms}
                 kitchens={item.kitchens}
+                pictures={item.pictures}
                 backyard={item.backyard}
               />
             ))}
@@ -118,7 +152,7 @@ const Dashboard = props => {
             }}
           /> */}
         </Content>
-      </Layout>
+      </main>
     </>
   );
 };

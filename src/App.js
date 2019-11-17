@@ -1,28 +1,19 @@
 import React from "react";
-import { connect } from "react-redux";
-import Router from "./router";
-import Nav from "./components/Nav/Nav";
+import { useDispatch } from "react-redux";
+import Routes from "./router";
+import {BrowserRouter as Router} from "react-router-dom"
+import * as userActions from "./store/actions/userActions"
 
-class App extends React.Component {
-  render() {
-    return (
-      <>
-        <Nav />
-        <Router />
-      </>
-    );
-  }
+const App = (props) => {
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(userActions.authCheckSate());
+  },[])
+  return(
+    <Router>
+      <Routes />
+    </Router>
+  )
 }
 
-const mapStateToProps = state => {
-  return {};
-};
-
-const mapDispatchToProps = dispatch => {
-  return {};
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default App;

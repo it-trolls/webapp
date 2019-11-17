@@ -156,17 +156,16 @@ const Anuncio = props => {
 };
 
 Anuncio.propTypes = {
-  image: PropTypes.string.isRequired,
+  pictures: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
-  status: PropTypes.string.isRequired,
-  rooms: PropTypes.number.isRequired,
-  kitchen: PropTypes.number.isRequired,
+  contract: PropTypes.string.isRequired,
+  bedrooms: PropTypes.number.isRequired,
+  kitchens: PropTypes.number.isRequired,
   bathrooms: PropTypes.number.isRequired,
-  backyard: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   created_by: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired
+  username: PropTypes.string
 };
 
 export default Anuncio;
