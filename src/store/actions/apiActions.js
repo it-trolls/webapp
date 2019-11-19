@@ -1,4 +1,5 @@
 import axios from "axios";
+import {useHistory} from "react-router-dom"
 import {
   GET_ANUNCIOS_SUCESS,
   GET_ANUNCIO_SUCESS,
@@ -88,9 +89,10 @@ export const deleteAnuncio = (id, token) => {
   }
   return dispatch => {
     axios
-      .delete(`http://localhost:3010/api/v1/properties/${id}`,{"headers": headers})
-      .then(res => {
-        dispatch(getAnuncios());
+    .delete(`http://localhost:3010/api/v1/properties/${id}`,{"headers": headers})
+    .then(res => {
+        const history = useHistory();
+        history.push("/dashboard")
       })
       .catch(error => {
         dispatch(getAnuncios());
@@ -99,8 +101,9 @@ export const deleteAnuncio = (id, token) => {
 };
 
 export const createAnuncio = (payload, token) => {
+  console.log(payload)
   const headers = {
-    'Content-Type': 'application/json',
+    'content-type': 'multipart/form-data',
     'x-access-token': token
   }
   return dispatch => {
@@ -115,10 +118,14 @@ export const createAnuncio = (payload, token) => {
   };
 };
 
-export const getMessages = id => {
+export const getMessages = token => {
+  const headers = {
+    'Content-Type': 'application/json',
+    'x-access-token': token
+  }
   return dispatch => {
     axios
-      .get(`${id}`)
+      .get(`http://localhost:3010/api/v1/messages`, {"headers": headers})
       .then(res => {
         dispatch(getMessagesSucess(res.data));
       })
@@ -129,40 +136,46 @@ export const getMessages = id => {
   };
 };
 
-export const getMessage = id => {
+export const getMessage = (id, token) => {
+  const headers = {
+    'x-access-token': token
+  }
   return dispatch => {
     axios
-      .get(`${id}`)
+      .get(`http://localhost:3010/api/v1/messages/${id}`, {"headers": headers})
       .then(res => {
+        dispatch(getMessageSucess(res.data));
+      })
+      .catch(error => {
         dispatch(getMessageSucess());
-      })
-      .catch(error => {
-        dispatch(getMessages());
       });
   };
 };
 
-export const deleteMessage = id => {
+export const deleteMessage = (id, token) => {
+  const headers = {
+    'x-access-token': token
+  }
   return dispatch => {
     axios
-      .delete(`${id}`)
+      .delete(`http://localhost:3010/api/v1/messages/${id}`,{"headers": headers})
       .then(res => {
-        dispatch(getMessages());
+        dispatch(getMessages(token));
       })
       .catch(error => {
-        dispatch(getMessages());
+        dispatch(getMessages(token));
       });
   };
 };
 
-export const createMessage = (message, id, token) => {
+export const createMessage = (message, id, token, propertyId) => {
   const headers = {
     'Content-Type': 'application/json',
     'x-access-token': token
   }
   return dispatch => {
     axios
-      .post(``, {"message": message, "id": id}, {"headers": headers})
+      .post(`http://localhost:3010/api/v1/messages/`, {"body": message, "receiver": id, "propertyId": propertyId}, {"headers": headers})
       .then(res => {
         dispatch(getMessages());
       })

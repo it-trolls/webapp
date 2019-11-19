@@ -11,6 +11,8 @@ import {
 import { Comment, Delete, Visibility } from "@material-ui/icons";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import {useDispatch, useSelector} from "react-redux"
+import * as apiActions from "../../../store/actions/apiActions"
 
 const useStyles = makeStyles(theme => ({
   inline: {
@@ -27,6 +29,12 @@ const useStyles = makeStyles(theme => ({
 
 const MensajeItem = props => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.user.token)
+
+  const deleteMessage = () => {
+    dispatch(apiActions.deleteMessage(props.id, token));
+  }
   return (
     <ListItem alignItems="flex-start">
       <ListItemAvatar>
@@ -53,7 +61,7 @@ const MensajeItem = props => {
           edge="end"
           aria-label="ver"
           component={NavLink}
-          to={`/mensajes/nuevo?to=${props.userid}`}
+          to={`/mensajes/detalle/${props.id}`}
         >
           <Visibility />
         </IconButton>
@@ -61,15 +69,14 @@ const MensajeItem = props => {
           edge="end"
           aria-label="responder"
           component={NavLink}
-          to={`/mensajes/nuevo/${props.id}`}
+          to={`/mensajes/nuevo?id=${props.sender}&propertyId=${props.propertyId}`}
         >
           <Comment />
         </IconButton>
         <IconButton
           edge="end"
           aria-label="borrar"
-          component={NavLink}
-          to={`/mensajes/delete/${props.id}`}
+          onClick={deleteMessage}
         >
           <Delete />
         </IconButton>

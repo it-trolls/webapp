@@ -5,7 +5,7 @@ import Side from "./SideMenu/Sidemenu";
 import { useQuery } from "../queryHelper";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, makeStyles } from "@material-ui/core";
-import Nav from "../Nav/Nav";
+import Search from '../Searchbar/Searchbar'
 import axios from "axios";
 
 const Layout = styled.main`
@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
       gridTemplateColumns: "repeat(3, 1fr)",
       gridTemplateRows: "repeat(2, 1fr)",
       gridColumnGap: "15px",
-      gridRowGap: "10px",  
+      gridRowGap: "10px"
     }
   },
   ordenarBtn: {
@@ -72,35 +72,40 @@ const useStyles = makeStyles(theme => ({
       display: "block"
     }
   }
-}))
+}));
 
 const Dashboard = props => {
   const classes = useStyles();
   const query = useQuery();
+  const userId = useSelector(state => state.user.userId);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [page, setPage] = React.useState(null);
   const [posts, setPosts] = React.useState([]);
-  const [sidebar, setSidebar] = React.useState(false)
+  const [sidebar, setSidebar] = React.useState(false);
   const dispatch = useDispatch();
 
   const handleDrawerToggle = () => {
     props.openSideBar();
   };
 
+  const fetchAnuncios = (query) => {
+      const url =
+        query
+          ? `http://localhost:3010/api/v1/properties?${query}`
+          : "http://localhost:3010/api/v1/properties/";
+      axios
+        .get(url)
+        .then(res => {
+          setPosts(res.data);
+        })
+        .catch(err => {
+          //dispatch(getAnunciosFail(error))
+          console.log(err);
+        });
+  };
+
   React.useEffect(() => {
-    const url =
-      query.toString().length > 3
-        ? `http://localhost:3010/api/v1/properties?${query}`
-        : "http://localhost:3010/api/v1/properties/";
-    axios
-      .get(url)
-      .then(res => {
-        setPosts(res.data);
-      })
-      .catch(err => {
-        //dispatch(getAnunciosFail(error))
-        console.log(err);
-      });
+    fetchAnuncios();
   }, []);
 
   const handleChangePage = (event, newPage) => {
@@ -117,14 +122,22 @@ const Dashboard = props => {
         <Side
           mobileOpen={sidebar}
           handleDrawerToggle={() => setSidebar(false)}
+          fetchAnuncios={fetchAnuncios}
         />
         <Content>
-          <Button className={classes.ordenarBtn} onClick={() => setSidebar(!sidebar)}>Ordenar</Button>
-          
+          <Search fetchAnuncios={fetchAnuncios} />
+          <Button
+            className={classes.ordenarBtn}
+            onClick={() => setSidebar(!sidebar)}
+          >
+            Ordenar
+          </Button>
           <Grid>
             {posts.map(item => (
               <Anuncio
                 id={item._id}
+                created_by={item.created_by}
+                userId={userId}
                 title={item.title}
                 contract={item.contract}
                 price={item.price}

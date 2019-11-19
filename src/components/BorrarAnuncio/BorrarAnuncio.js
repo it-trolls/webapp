@@ -1,20 +1,26 @@
 import React from 'react'
 import * as apiActions from '../../store/actions/apiActions'
+import axios from 'axios'
 import {useDispatch, useSelector} from 'react-redux'
 import {Container, Paper, Typography, Button} from '@material-ui/core'
-import {NavLink} from 'react-router-dom'
+import {NavLink, useHistory} from 'react-router-dom'
 import {useQuery} from '../queryHelper'
+
 
 const BorrarArticulo = () => {
     const query = useQuery();
     const dispatch = useDispatch()
     const token = useSelector(state => state.user.token)
+    const history = useHistory();
 
     const confirmDelete = () => {
         dispatch(apiActions.deleteAnuncio(query.get('id'), token))
+        setTimeout(()=>{
+            history.push('/dashboard')
+        }, 1000)
     }
-    return(
-        <Container>
+    return (
+        <Container style={{ marginTop: "6rem"}}>
             <Paper>
                 <Typography>
                     ¿Estas seguro que deseas borrar el anuncio: ?

@@ -14,7 +14,7 @@ import {
 } from "@material-ui/icons";
 import { Chip } from "@material-ui/core/";
 import { NavLink } from "react-router-dom";
-import imagen from "../../../assets/citybg.jpg";
+import noimage from "../../../assets/noimg.png";
 
 const Card = styled.div`
   width: 332px;
@@ -97,7 +97,7 @@ const Anuncio = props => {
   return (
     <Card>
       <img
-        src={props.picture}
+        src={props.pictures ? `http://localhost:3010/${props.pictures[0]}` : noimage}
         alt={props.title + " image"}
         style={{ height: "60%", width: "332px", backgroundSize: "cover" }}
       />
@@ -131,7 +131,7 @@ const Anuncio = props => {
               style={{ width: "157px", cursor: "pointer" }}
             ></Chip>
           </NavLink>
-          {props.username && props.username === props.created_by ? (
+          {props.userId && props.userId === props.created_by ? (
             <>
               <NavLink to={`dashboard/nuevo?id=${props.id}`}>
                 <Chip
@@ -140,7 +140,7 @@ const Anuncio = props => {
                   style={{ width: "157px" }}
                 />
               </NavLink>
-              <NavLink to={`dashboard/borrar/${props.id}`}>
+              <NavLink to={`dashboard/borrar?id=${props.id}`}>
                 <Chip
                   label="BORRAR ANUNCIO"
                   icon={<Delete />}

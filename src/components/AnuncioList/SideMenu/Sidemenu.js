@@ -10,40 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import logo from "../../../assets/logoblue.jpeg";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { ListSubheader } from "@material-ui/core";
-import { NavLink } from "react-router-dom";
-
-const SideMenu = styled.div`
-  margin-top: 2.5rem;
-  flex: 15%;
-  margin-left: 15px;
-  display: flex;
-  flex-direction: column;
-  height: 400px;
-  ul {
-    list-style: none;
-    margin-top: 5px;
-    padding: 5px;
-  }
-
-  @media (max-width: 768px) {
-    flex-direction: row;
-    margin-left: 0px;
-  }
-`;
-const Category = styled.h4`
-  font-weight: bold;
-`;
-
-const Listrrr = styled.div`
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Filter = styled.div`
-  cursor: pointer;
-`;
+import { NavLink, useHistory } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -86,10 +53,10 @@ const Sidemenu = props => {
   const classes = useStyles();
   const { container } = props;
   const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
 
-  const handleClick = () => {
-    setOpen(!open);
+  const handleClick = url => {
+    props.handleDrawerToggle();
+    props.fetchAnuncios(url);
   };
 
   const drawer = (
@@ -112,31 +79,22 @@ const Sidemenu = props => {
         <List dense component="div" disablePadding>
           <ListItem
             button
-            component={NavLink}
-            to="/dashboard?type=casa"
             className={classes.nested}
-            onClick={props.handleDrawerToggle}
-
+            onClick={() => handleClick("type=house")}
           >
             <ListItemText primary="Casa" />
           </ListItem>
           <ListItem
             button
-            component={NavLink}
-            to="/dashboard?type=depto"
             className={classes.nested}
-            onClick={props.handleDrawerToggle}
-
+            onClick={() => handleClick("type=department")}
           >
             <ListItemText primary="Departamento" />
           </ListItem>
           <ListItem
             button
-            component={NavLink}
-            to="/dashboard?type=oficina"
             className={classes.nested}
-            onClick={props.handleDrawerToggle}
-
+            onClick={() => handleClick("type=office")}
           >
             <ListItemText primary="Oficina" />
           </ListItem>
@@ -147,31 +105,22 @@ const Sidemenu = props => {
         <List dense component="div" disablePadding>
           <ListItem
             button
-            component={NavLink}
-            to="/dashboard?size=1"
             className={classes.nested}
-            onClick={props.handleDrawerToggle}
-
+            onClick={() => handleClick("bedrooms=1")}
           >
             <ListItemText primary="Monoambiente" />
           </ListItem>
           <ListItem
             button
-            component={NavLink}
-            to="/dashboard?size=2"
             className={classes.nested}
-            onClick={props.handleDrawerToggle}
-
+            onClick={() => handleClick("bedrooms=2")}
           >
             <ListItemText primary="Dos habitaciones" />
           </ListItem>
           <ListItem
             button
-            component={NavLink}
-            to="/dashboard?size=3"
             className={classes.nested}
-            onClick={props.handleDrawerToggle}
-
+            onClick={() => handleClick("bedrooms=3")}
           >
             <ListItemText primary="Más de dos" />
           </ListItem>
@@ -182,29 +131,22 @@ const Sidemenu = props => {
         <List dense component="div">
           <ListItem
             button
-            component={NavLink}
-            to="/dashboard?location=centro"
             className={classes.nested}
-            onClick={props.handleDrawerToggle}
+            onClick={() => handleClick("location=centro")}
           >
             <ListItemText primary="Centro" />
           </ListItem>
           <ListItem
             button
-            component={NavLink}
-            to="/dashboard?location=micro"
             className={classes.nested}
-            onClick={props.handleDrawerToggle}
-
+            onClick={() => handleClick("location=micro")}
           >
             <ListItemText primary="Microcentro" />
           </ListItem>
           <ListItem
             button
-            component={NavLink}
-            to="/dashboard?location=macro"
             className={classes.nested}
-            onClick={props.handleDrawerToggle}
+            onClick={() => handleClick("location=macro")}
           >
             <ListItemText primary="Macrocentro" />
           </ListItem>

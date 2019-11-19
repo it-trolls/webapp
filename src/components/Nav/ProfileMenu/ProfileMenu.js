@@ -8,6 +8,11 @@ import {NavLink} from "react-router-dom";
 const ProfileMenu = props => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.user.token);
+
+  const logout = () => {
+    dispatch(userActions.authLogout())
+    props.handleMenuClose()
+  }
   return (
     <Menu
       anchorEl={props.anchorEl}
@@ -21,7 +26,7 @@ const ProfileMenu = props => {
       <NavLink to={`/dashboard?created_by=${token}`}>
         <MenuItem onClick={props.handleMenuClose}>Mis anuncios</MenuItem>
       </NavLink>
-      <MenuItem onClick={() => dispatch(userActions.authLogout())}>Salir</MenuItem>
+      <MenuItem onClick={logout}>Salir</MenuItem>
     </Menu>
   );
 };

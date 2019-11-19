@@ -12,10 +12,8 @@ import {
   Divider
 } from "@material-ui/core";
 import logo from "../../assets/logo.png";
-import Nav from "../Nav/Nav";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { DropzoneArea } from "material-ui-dropzone";
 import * as apiActions from '../../store/actions/apiActions'
 import {useDispatch, useSelector} from 'react-redux';
 import {useQuery} from '../queryHelper'
@@ -50,6 +48,7 @@ const CrearAnuncio = () => {
   const query = useQuery();
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
   const token = useSelector(state => state.user.token)
   const post = useSelector(state => state.api.post)
   const [values, setValues] = React.useState({
@@ -66,21 +65,31 @@ const CrearAnuncio = () => {
     kitchens: 0,
     bathrooms: 0,
     bedrooms: 0,
-    pictures: [],}
+    pictures: null,}
   );
 
   const handleChange = name => event => {
-    setValues({ ...values, [name]: event.target.value });
+    if(name === 'pictures'){
+      setValues({...values, [name]: event.target.files[0]})
+    }else{
+      setValues({ ...values, [name]: event.target.value });
+    }
   };
 
   const onSubmit = e => {
     e.preventDefault();
-    if(query.get("id")){
-      dispatch(apiActions.createAnuncio(query.get("id"), values, token))
-    }else{
-      dispatch(apiActions.createAnuncio(values, token))
+    const formData = new FormData()
+    for(let value in values){
+      formData.append(value, values[value])
     }
-    //history.push('/dashboard')
+    if(query.get("id")){
+      dispatch(apiActions.updateAnuncio(query.get("id"), values, token))
+    }else{
+      dispatch(apiActions.createAnuncio(formData, token))
+    }
+    setTimeout(()=>{
+      history.push('/dashboard')
+    }, 1000)
   };
 
   React.useEffect(()=> {
@@ -111,6 +120,7 @@ const CrearAnuncio = () => {
             autoComplete="off"
             onSubmit={onSubmit}
             encType="multipart/form-data"
+            id="create-form"
           >
             <TextField
               id="standard-full-width"
@@ -144,7 +154,7 @@ const CrearAnuncio = () => {
                 }}
               >
                 <MenuItem value={"rental"}>Alquiler</MenuItem>
-                <MenuItem value={"sell"}>Venta</MenuItem>
+                <MenuItem value={"sale"}>Venta</MenuItem>
               </Select>
             </FormControl>
             <FormControl className={classes.formControl}>
@@ -246,9 +256,7 @@ const CrearAnuncio = () => {
             />
 
             <Divider />
-            <DropzoneArea 
-            acceptedFiles={['image/*']}
-            onChange={e => setValues({...values, "pictures" : e})} />
+            <input type="file" name="file" onChange={handleChange("pictures")} />
             <Button
               type="submit"
               variant="contained"

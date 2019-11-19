@@ -5,6 +5,7 @@ import { Container, List, Divider, Typography, Icon } from "@material-ui/core";
 import { Email } from "@material-ui/icons/";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux"
+import * as apiActions from "../../store/actions/apiActions"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,8 +20,15 @@ const useStyles = makeStyles(theme => ({
 
 const MensajeList = props => {
   const classes = useStyles();
+  const messages = useSelector(state => state.api.messages)
   const dispatch = useDispatch();
-  const [messages, setMessages] = React.useState([])
+
+  console.log(messages)
+  
+  React.useState(() => {
+    dispatch(apiActions.getMessages(localStorage.getItem("token")))
+  },[])
+
   return (
     <div>
       <Nav />
@@ -33,11 +41,12 @@ const MensajeList = props => {
           {messages.map(msg => (
             <>
               <Mensaje
-                id={msg.id}
+                id={msg._id}
                 userid={msg.userid}
-                username={msg.username}
+                username={msg.sender}
                 avatar={msg.avatar}
-                message={msg.message}
+                message={msg.body}
+                propertyId={msg.propertyId}
               />
               <Divider variant="inset" component="li" />
             </>

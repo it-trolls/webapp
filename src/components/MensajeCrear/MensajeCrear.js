@@ -7,10 +7,9 @@ import {
   Button, makeStyles
 } from "@material-ui/core";
 import { Email } from "@material-ui/icons";
-import Nav from "../Nav/Nav";
 import {useQuery} from "../queryHelper";
 import {useDispatch, useSelector} from "react-redux"
-import {NavLink} from "react-router-dom"
+import {NavLink, useHistory} from "react-router-dom"
 import * as apiActions from "../../store/actions/apiActions"
 
 const useStyles = makeStyles(theme => ({
@@ -30,6 +29,7 @@ const useStyles = makeStyles(theme => ({
 const MensajeCrear = props => {
   const query = useQuery(); 
   const classes = useStyles();
+  const history = useHistory();
   const dispatch = useDispatch();
   const token = useSelector(state => state.user.token);
   const [value, setValue] = React.useState("");
@@ -40,8 +40,12 @@ const MensajeCrear = props => {
 
   const sendMessage = e => {
     const id = query.get("id");
+    const propertyId = query.get("propertyId")
     if(value.length > 8 && id) {
-      dispatch(apiActions.createMessage(value, id, token))
+      dispatch(apiActions.createMessage(value, id, token, propertyId))
+      setTimeout(()=>{
+        history.push("/messages")
+      })
     }
   }
   return (

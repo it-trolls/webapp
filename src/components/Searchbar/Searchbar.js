@@ -49,7 +49,11 @@ const SearchBar = props => {
   const onSubmit = e => {
     e.preventDefault();
     if (search.length >= 3) {
-      history.push(`/dashboard?search=${search}`);
+      if (props.fetchAnuncios) {
+        props.fetchAnuncios(`search=${search}`)
+      }else{
+        history.push(`/dashboard?search=${search}`);
+      }
     }
   };
   return (

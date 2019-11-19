@@ -40,9 +40,9 @@ const useStyles = makeStyles(theme => ({
 const Auth = props => {
   const classes = useStyles();
   const [login, setLogin] = React.useState(true);
+  const [, forceUpdate] = React.useState()
   const token = useSelector(state => state.user.token)
   const dispatch = useDispatch()
-
 
   const toggleAuth = () => {
     setLogin(!login);
@@ -54,6 +54,7 @@ const Auth = props => {
     } else {
       dispatch(userActions.authSignup(payload))
     }
+    forceUpdate()
   };
 
   const display = login ? (

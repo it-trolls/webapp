@@ -78,7 +78,6 @@ const useStyles = makeStyles(theme => ({
 
 const ApplicationBar = props => {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const token = useSelector(state => state.user.token)
   return (
     <AppBar className={classes.appBar}>
@@ -88,7 +87,6 @@ const ApplicationBar = props => {
             <img src={logo} alt="Inmobapp logo" height="60px" />
           </NavLink>
         </Typography>
-        <Search />
         {token ? (
           <>
             <div className={classes.sectionDesktop}>

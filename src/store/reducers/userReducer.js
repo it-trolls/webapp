@@ -11,6 +11,7 @@ import { updateObject } from "../helper";
 const initialState = {
   token: null,
   error: null,
+  userId: null,
   loading: false,
   username: null,
   is_admin: null,
@@ -30,6 +31,7 @@ const authSucess = (state, action) => {
     token: action.token,
     is_admim: action.is_admin,
     username: action.username,
+    userId: action.userId,
     loading: false
   });
 };
